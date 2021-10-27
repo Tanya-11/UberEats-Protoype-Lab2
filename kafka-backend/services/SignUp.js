@@ -7,11 +7,13 @@ async function handle_request(msg, callback) {
     console.log('in signup!!!!!!!!!!!!!!!!!!!!!');
     console.log(msg);
     if (!msg.username) {
-        res.statusCode = 500
-        res.send({
+       // res.statusCode = 500
+        const Error ={
           name: "UserName Error",
           message: "The username name is required",
-        })
+        }
+        callback(null, {'statusCode' :500, 'err':Error })
+        //res.send()
       } else {
           console.log('In mongoose');
         Users.register(
