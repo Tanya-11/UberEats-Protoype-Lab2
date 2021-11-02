@@ -22,6 +22,8 @@ export const About = (props) => {
     const [image, setImage] = useState()
     useEffect(() => {
         setUserData(props.data)
+        setImage(props.data.image)
+        console.log(props.data);
     }, [props.data])
 
     const submitCustomerData = () => {
@@ -39,12 +41,12 @@ export const About = (props) => {
             userId: customer,
         })
         const setPhoto = Axios.post('http://localhost:3001/api/upload/photo', formData, config)
-        Promise.all([setPhoto])
+        Promise.all([setProfile,setPhoto])
 
             .then((res) => {
               //  console.log(userData);
                 console.log(res)
-           //   setImage(res[0].data)
+                setImage(res[1].data.imageURL)
             })
             .catch((err) => {
                 throw err
@@ -78,8 +80,8 @@ export const About = (props) => {
         //  const result = await Axios.post('http://localhost:3001/upload-pic', formData, config)
         //  setImage(result.data.imagePath)
         //  setImage('image/3fe4ee4f70dfcfc6cf0fc7acb09ea0f5')
-        const result = await Axios.get('http://localhost:3001/fetch-file')
-        console.log(result.data[0])
+     //   const result = await Axios.get('http://localhost:3001/fetch-file')
+     //   console.log(result.data[0])
       //  setImage(result.data[1].image)
         // console.log(res);
         // setImage(res.data)
@@ -97,7 +99,7 @@ export const About = (props) => {
                         margin: '12%',
                         float: 'right',
                     }}
-                    src={`http://localhost:3001/${image}`}
+                    src={`http://localhost:3001/api/images/${image}`}
                 />
             )}
             <label>

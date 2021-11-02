@@ -6,6 +6,7 @@ import { useHistory } from 'react-router'
 import { userOrderPlaced } from '../../../redux/actions/actions'
 import { Button, Table } from 'react-bootstrap'
 import * as moment from 'moment'
+import OrderDetails from '../orders/OrderDashboard'
 const Cart = () => {
     const [orderPlaced, setOrderPlaced] = useState(false)
     const cart = useSelector((state) => state.cart)
@@ -30,6 +31,7 @@ const Cart = () => {
             total = total + cart[i].price * cart[i].text
             setTotal(total)
         }
+        placeOrder();
 
        // getAddr()
     }, [])
@@ -106,11 +108,10 @@ const Cart = () => {
            ])
             )
         })
-  
-   
     }
 
     const setOrderVal=()=>{
+            console.log(orders.length);
         console.log(cart.length);
         console.log(orders);
         Axios.post('http://localhost:3001/api/cart/placed',{

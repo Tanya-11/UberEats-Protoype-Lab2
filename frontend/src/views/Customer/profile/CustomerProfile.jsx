@@ -19,7 +19,8 @@ const CustomerProfile = () => {
         state: '',
         country: '',
         nickName: '',
-        fav:[]
+        fav:[],
+        image:''
     })
     const [showAbout, setShowAbout] = useState(false)
 
@@ -50,7 +51,8 @@ const CustomerProfile = () => {
                             state: res.data.state || '',
                             country: res.data.country || '',
                             nickName: res.data.nickName || '',
-                            fav:res.data.fav || []
+                            fav:res.data.fav || [],
+                            image: res.data.imageURL||''
                         },
                       //  setImage(res?.data?.image)
 

@@ -9,6 +9,9 @@ import { LoginPage } from '@views/auth/LogInPage'
 import Header from './views/Customer/dashboard/Header'
 import RestCardDetail from './views/common/RestCardDetail/RestCardDetail'
 import OrderDetails from './views/Customer/orders/OrderDashboard'
+import PastOrders from './views/Customer/orders/PastOrders'; 
+import CustomerActiveOrders from './views/Customer/orders/CustomerActiveOrders'
+import CustomerCancelledOrders from './views/Customer/orders/CancelledOrders'
 import CustomerProfile from './views/Customer/profile/CustomerProfile'
 import Cart from './views/Customer/cart/Cart'
 import PrivateRoute from './auth/PrivateRoute'
@@ -88,9 +91,39 @@ function App() {
                         <Route path="/dashboard/cart-details" exact>
                             <Cart></Cart>
                         </Route>
-                        <Route path="/dashboard/order-details" exact>
+                        {/* <Route path="/dashboard/order-details" exact>
+                            <OrderDetails></OrderDetails>
+                            
+                        </Route> */}
+
+
+                        <Route path="/dashboard/order-details" >
+                        <div className="customer-orders">
+                        <div className="left-content">
+                        <OrderDetails/>
+                        </div>
+                        <div className="right-content">
+                        <Route path="/dashboard/order-details/past-orders" exact>
+                            <PastOrders></PastOrders>
+                        </Route>
+                        <Route path="/dashboard/order-details/cancelled-orders" exact>
+                            <CustomerCancelledOrders></CustomerCancelledOrders>
+                        </Route>
+                        <Route path="/dashboard/order-details/active-orders" exact>
+                            <CustomerActiveOrders></CustomerActiveOrders>
+                        </Route>
+                        </div>
+                        </div>
+                        </Route>
+
+
+                      
+                        {/* <Route path="/dashboard/active-orders" exact>
                             <OrderDetails></OrderDetails>
                         </Route>
+                        <Route path="/dashboard/cancelled-orders" exact>
+                            <OrderDetails></OrderDetails>
+                        </Route> */}
                     </div>
                  </PrivateRoute>
                 <PrivateRoute path="/customer-profile" exact>

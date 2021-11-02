@@ -5,7 +5,16 @@ const orders = require("../models/orders")
 async function handle_request(msg, callback) {
     console.log('user'+msg);
     Order.find(
-        {'orders.customer.username':msg.user}, 
+       {
+        $and: [   
+        {'orders.customer.username':msg.user},
+        {$or: [
+            {'orderStatus':{ $eq: 'Delivered'}},
+            {'orderStatus':{ $eq: 'PickedUp'}}
+            ]
+        }
+        ]
+    }       
         ).then(
         resp=>{
            console.log(resp);

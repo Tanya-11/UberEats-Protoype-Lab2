@@ -9,7 +9,7 @@ var refreshToken = require('./services/RefreshToken')
 /*******************************************Restaurant Services***************************************************/
 var setActiveOrders = require('./services/GetActiveOrders')
 var setCompleteOrders = require('./services/GetCompleteOrders')
-var setRestProfile = require('./services/GetRestProfile')
+var getRestProfile = require('./services/GetRestProfile')
 var setAddNewDish = require('./services/AddNewDish')
 var setupdateDish = require('./services/UpdateDish')
 var setOrderStatus = require('./services/UpdateOrderStatus')
@@ -22,7 +22,10 @@ var fetchFav = require('./services/ViewCustomerFavRest');
 var setFav = require('./services/UpdateCustomerFavRest')
 var customerProfile = require('./services/ViewCustomerProfile')
 var setCustomerProfile = require('./services/UpdateCustomerProfile')
-var getCutomerOrders = require('./services/ViewCustomerOrders')
+var getCutomerOrdersPast = require('./services/ViewCustomerPastOrders')
+var getCutomerOrdersActive = require('./services/ViewCustomerActiveOrders')
+var getCutomerOrdersCancelled = require('./services/ViewCustomerCancelledOrders')
+
 require('./utils/database');
 
 
@@ -62,23 +65,24 @@ handleTopicRequest("userSignup",signUp)
 handleTopicRequest("userLogin",login)
 handleTopicRequest("userLogout",logOut)
 handleTopicRequest("refreshToken",refreshToken)
+/*******************************************Restaurant handleTopic***************************************************/
 handleTopicRequest("setActiveOrders",setActiveOrders)
 handleTopicRequest("setAddNewDish",setAddNewDish)
 handleTopicRequest("setCompleteOrders",setCompleteOrders)
 handleTopicRequest("setupdateDish",setupdateDish)
-handleTopicRequest("setRestProfile",setRestProfile)
+handleTopicRequest("setRestProfile",getRestProfile)
 handleTopicRequest("setOrderStatus",setOrderStatus)
 handleTopicRequest("updateRestProfile",updateRestProfile)
-// handleTopicRequest("refreshToken",refreshToken)
-// handleTopicRequest("refreshToken",refreshToken)
-
+/*******************************************Customer handleTopic***************************************************/
 handleTopicRequest("fetchSearchResults",fetchSearchResults)
 handleTopicRequest("placeFoodOrder",placeFoodOrder)
 handleTopicRequest("fetchFav",fetchFav)
 handleTopicRequest("setFav",setFav)
 handleTopicRequest("customerProfile",customerProfile)
 handleTopicRequest("setCustomerProfile",setCustomerProfile)
-handleTopicRequest("getCustomerOrders",getCutomerOrders)
+handleTopicRequest("getCutomerOrdersPast",getCutomerOrdersPast)
+handleTopicRequest("getCutomerOrdersCancelled",getCutomerOrdersCancelled)
+handleTopicRequest("getCutomerOrdersActive",getCutomerOrdersActive)
 
 
 

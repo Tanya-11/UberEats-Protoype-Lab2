@@ -40,7 +40,7 @@ const ActiveOrders = () => {
                 (res) => {
                     console.log(res)
                     res.data.forEach((item) => {
-                        console.log(item);
+                        console.log(item)
                         setActiveOrders((prev) => [
                             ...prev,
                             {
@@ -128,7 +128,7 @@ const ActiveOrders = () => {
         for (var i = 0; i < activeOrders.length; i++) {
             // total += (+orders[i].price * orders.text[i]);
             console.log(activeOrders[i].orderId)
-            console.log(i);
+            console.log(i)
             res.push(
                 await Axios.post('http://localhost:3001/api/orders/update/status', {
                     orderId: activeOrders[i].orderId,
@@ -137,7 +137,7 @@ const ActiveOrders = () => {
                 })
             )
         }
-        console.log(res);
+        console.log(res)
         for (var i = 0; i < res.length; i++) {
             if (res[i].status == 200) {
                 console.log('Order Updated')
@@ -165,7 +165,7 @@ const ActiveOrders = () => {
                             <tr key={index}>
                                 <td
                                 //  onClick={() => showUserInfo(el.custId, !isClicked)}
-                                 >
+                                >
                                     <a>{el.custId}</a>
                                 </td>
                                 <td>
@@ -184,22 +184,21 @@ const ActiveOrders = () => {
                                 </td>
                                 <td>
                                     <table>
-                                    <thead>
-                    <tr>
-                        <td>Dish</td>
-                        <td>Price</td>
-                        <td>Quanity</td>
-                    </tr>
-                    </thead>
-                                        <tbody>{
-                                        el.dishes.
-                                        map((item, index) => (
+                                        <thead>
                                             <tr>
-                                                <td>{item.dishName}</td>
-                                                <td>{item.price}</td>
-                                                <td>{item.quantity}</td>
+                                                <td>Dish</td>
+                                                <td>Price</td>
+                                                <td>Quanity</td>
                                             </tr>
-                                        ))}
+                                        </thead>
+                                        <tbody>
+                                            {el.dishes.map((item, index) => (
+                                                <tr>
+                                                    <td>{item.dishName}</td>
+                                                    <td>{item.price}</td>
+                                                    <td>{item.quantity}</td>
+                                                </tr>
+                                            ))}
                                         </tbody>
                                     </table>
                                 </td>

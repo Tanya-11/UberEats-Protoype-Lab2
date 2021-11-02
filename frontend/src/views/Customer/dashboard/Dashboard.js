@@ -40,22 +40,11 @@ const Dashboard = () => {
         user: customer,
     })
     useEffect(() => {
-        console.log('ggg'+JSON.parse(localStorage.getItem('address')).city);
-    //     Axios.post('http://localhost:3001/api/favs', {
-    //         searchData:searchData
-    // })
-    //     .then(res=>{
-    //         console.log("333333333333333333334444444444444444");
-    //         console.log(res);
-    //        // name = res.data.username;
-    //       //  setName(res.data.username);
-    //       setrestData(res.data)
-    //     })
-    //     .catch(err=>{
-    //         console.error(err)
-    //     })
+        // console.log('ggg'+JSON.parse(localStorage.getItem('address')).city);
+
         Promise.all([getRestData, getFavData])
             .then((res) => {
+                console.log("resul############");
                 console.log(res)
                 res[0].data.map((el) => {
                     res[1].data.map((item) => {
@@ -98,11 +87,11 @@ const Dashboard = () => {
                             checked={searchData.mode === 'pick'} />
                         Pick Up
                     </label>
-                    <label>
+                    {/* <label>
                         <input type="radio" value="both" name="mode"
                             checked={searchData.mode === 'both'} />
                         Both
-                    </label>
+                    </label> */}
                 </div>
                 <div className="location">
                     <input

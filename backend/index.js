@@ -2,6 +2,7 @@ const express = require("express");
 // const session = require("express-session");
 // const db = require('./utils/database');
 const mongoose = require('mongoose');
+var kafka = require('./kafka/client');
 
 const cors = require('cors');
 const cookieParser = require("cookie-parser");
@@ -54,7 +55,7 @@ const upload = multer({
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
-// app.use('/images', express.static('images'));
+app.use('/images', express.static('images'));
 app.use(
   cors(
     {
@@ -91,22 +92,6 @@ app.use("/api", customerRouter)
 //---------------------------------------------END OF MIDDLEWARE------------------------------------------------------------
 
 const saltRounds = 10;
-
-
-router.post('/upload/photo', upload.single('image'), (req, res) => {
-  console.log('print' + req.body.username);
-  console.log('img'+req.file.path);
-  Order.findOne({'username':req.body.username}).then(
-    res=>{
-      console.log(res);
-    },
-    err=>{
-      console.log(err);
-    }
-  )
-  .catch(error=>{
-    console.log(error);
-  })
   // let param = '';
   // let sql = ''
   // if (req.body.custId) {
@@ -131,7 +116,7 @@ router.post('/upload/photo', upload.single('image'), (req, res) => {
   //     console.log(JSON.stringify(result));
   //   }
   // })
-});
+//});
 
 
 

@@ -9,11 +9,11 @@ const {
 } = require("../../backend/auth");
 
 async function handle_request(msg, callback) {
-    console.log('in logout');
+    console.log('in logout'+JSON.stringify(msg));
   Users.findById(msg._id).then(
     (user) => {
       const tokenIndex = user.refreshToken.findIndex(
-        (item) => item.refreshToken === refreshToken
+        (item) => item.refreshToken === msg.refreshToken
       );
 
       if (tokenIndex !== -1) {
@@ -22,8 +22,7 @@ async function handle_request(msg, callback) {
 
       user.save((err, user) => {
         if (err) {
-          res.statusCode = 500;
-          res.send(err);
+            console.log('errrorRRRRRRRRRRRRRRRR');
           callback(null, { statusCode: 500, Error: err });
         } else {
           callback(null, { statusCode: 200 });
