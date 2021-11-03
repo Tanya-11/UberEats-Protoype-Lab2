@@ -4,143 +4,130 @@ let server = require('../index');
 chai.should();
 chai.use(chaiHttp);
 
-describe('POST /get-favorites', () => {
+describe('POST /favs', () => {
     it('It should get favorites', (done) => {
         chai.request(server)
-            .post('/get-favorites')
-            .send({ email: "user1@gmail.com" })
+            .post('/api/favs')
+            .send({ user: "user@gmail.com",restaurant:"paradise@gmail.com",isFav:false })
             .end((err, response) => {
-                response.should.have.status(200);
-                response.body.should.be.a('array');
-                response.body.length.should.be.eql(2);
+               response.should.have.status(200);
                 done();
 
             })
     });
     it('It should not get favorites', (done) => {
         chai.request(server)
-            .post('/get-favorites')
-            .send({ email: '' })
+            .post('/api/favs')
+            .send({ user: "user@gmail.com",restaurant:"",isFav:false })
             .end((err, response) => {
-                response.should.have.status(200);
-                response.body.length.should.be.eql(0);
-                done(err);
+            response.should.have.status(400);
+            done();
+
             })
-    })
+    });
 });
-describe('POST /get-view-receipt', () => {
-    it('It should get view-receipt', (done) => {
-        const date = new Date();
+describe('POST customer/profile', () => {
+    it('It should get customer profile', (done) => {
         chai.request(server)
-            .post('/get-view-receipt')
-            .send({ date: '2021-10-10 23:18:08' })
+            .post('/api/customer/profile')
+            .send({  "username": "user@gmail.com" })
             .end((err, response) => {
                 response.should.have.status(200);
-                response.body.should.be.a('array');
-                response.body.length.should.be.eql(1);
+                response.body.should.be.a('object');
                 done();
             })
     });
-    it('It should not get view-receipt', (done) => {
+    it('It should not get customer profile', (done) => {
         chai.request(server)
-            .post('/get-view-receipt')
-            .send({ date: '' })
+            .post('/api/customer/profile')
+            .send({  "username": "" })
             .end((err, response) => {
-                response.should.have.status(400);
-                response.text.should.be.eql('Bad Request');
-                done(err);
+                response.should.have.status(500);
+                done();
             })
-    })
+    });
 });
 
-describe('POST /update-dishData', () => {
-    it('It should update view-receipt', (done) => {
-        const date = new Date();
+describe('POST /cancelled-orders', () => {
+    it('It should get cancelled orders', (done) => {
         chai.request(server)
-            .post('/update-dishData')
-            .send({ dishId: 8 })
+            .post('/api/cancelled-orders')
+            .send({user: "user@gmail.com" })
             .end((err, response) => {
                 response.should.have.status(200);
-                response.body.should.be.a('object');
+               response.body.should.be.a('object');
                 done();
             })
     });
-    it('It should not update /update-dishData', (done) => {
+    it('It should not get cancelled orders', (done) => {
         chai.request(server)
-            .post('/update-dishData')
-            .send({ dishId: '' })
+            .post('/api/cancelled-orders')
+            .send({user: "" })
             .end((err, response) => {
                 response.should.have.status(400);
-                response.text.should.be.eql('Bad Request');
-                done(err);
-            })
-    })
-});
-describe('POST /set-profile', () => {
-    it('It should set-profile', (done) => {
-        chai.request(server)
-            .post('/set-profile')
-            .send({
-                name: 'User3',
-                email: 'user3@gmail.com',
-                phone: 8989898989,
-                city: 'San Jose',
-                state: 'CA',
-                country: 'USA',
-                nickName: 'U3',
-                custId: 'user3@gmail.com'
-            }
-            )
-            .end((err, response) => {
-                response.should.have.status(200);
-                // response.body.should.be.a('object');
                 done();
             })
     });
-    it('It should not update /set-profile', (done) => {
+});
+describe('POST /past-orders', () => {
+    it('It should get past orders', (done) => {
         chai.request(server)
-            .post('/set-profile')
-            .send({
-                name: 'User4',
-                email: 'user3@gmail.com',
-                phone: '777878686',
-                city: 'San Jose',
-                state: 'CA',
-                country: 'USA',
-                nickName: 777,
-                custId: 'user2@gmail.com'
+            .post('/api/past-orders')
+            .send({user: "user@gmail.com" })
+            .end((err, response) => {
+                response.should.have.status(200);
+               response.body.should.be.a('object');
+                done();
             })
+    });
+    it('It should not get past orders', (done) => {
+        chai.request(server)
+            .post('/api/past-orders')
+            .send({user: "" })
             .end((err, response) => {
                 response.should.have.status(400);
-                response.text.should.be.eql('No Update');
-                done();
-            })
-    })
-});
-describe('POST favorites-delete', () => {
-    it('It should update favorites-delete', (done) => {
-        chai.request(server)
-            .post('/favorites-delete')
-            .send({
-                user: 'liam@gmail.com',
-                restaurant: 'dominos@gmail.com'
-            })
-            .end((err, response) => {
-                response.should.have.status(200);
-                response.body.should.be.a('object');
                 done();
             })
     });
 });
-describe('POST /get-address', () => {
-    it('It should get-address', (done) => {
-        const date = new Date();
+describe('POST /cancelled-orders', () => {
+    it('It should get cancelled orders', (done) => {
         chai.request(server)
-            .post('/get-address')
-            .send({ custId: 'liam@gmail.com' })
+            .post('/api/cancelled-orders')
+            .send({user: "user@gmail.com" })
             .end((err, response) => {
                 response.should.have.status(200);
-                response.body.should.be.a('array');
+               response.body.should.be.a('object');
+                done();
+            })
+    });
+    it('It should not get cancelled orders', (done) => {
+        chai.request(server)
+            .post('/api/cancelled-orders')
+            .send({user: "" })
+            .end((err, response) => {
+                response.should.have.status(400);
+                done();
+            })
+    });
+});
+describe('POST /active-orders', () => {
+    it('It should get active orders', (done) => {
+        chai.request(server)
+            .post('/api/active-orders')
+            .send({user: "user@gmail.com" })
+            .end((err, response) => {
+                response.should.have.status(200);
+               response.body.should.be.a('object');
+                done();
+            })
+    });
+    it('It should not get active orders', (done) => {
+        chai.request(server)
+            .post('/api/active-orders')
+            .send({user: "" })
+            .end((err, response) => {
+                response.should.have.status(400);
                 done();
             })
     });

@@ -47,133 +47,32 @@ const {
   getRefreshToken,
   verifyUser,
 } = require("../auth");
+const { response } = require("express");
 
 router.post("/search", verifyUser, (req, res) => {
   console.log(req.body.searchData);
   let {
     city = "",
-    mode = "",
     category = "",
     searchTabText = "",
+    delivery = true,
+    pickUp = false,
   } = req.body.searchData;
-  console.log(mode);
-  let delivery = true;
-  let pickUp = false;
-  if (mode === "pick") {
-    delivery = false;
-    pickUp = true;
-  }
-  Users.find(
-    //         {role:'restaurant',
-    //         city:city,
-    //         deliveryMode:mode,
-    // }
-    {
-      $and: [
-        {
-          $or: [
-            { name: { $regex: `${searchTabText}`, $options: "i" } },
-            {
-              "dishes.dishName": { $regex: `${searchTabText}`, $options: "i" },
-            },
-          ],
-        },
-
-        {
-          dishes: {
-            $elemMatch: {
-              category: { $regex: category, $options: "i" },
-              //'Vegetarian'
-            },
-          },
-        },
-        {
-          city: { $regex: city, $options: "i" },
-          //    {"$in":[/San/]}
-        },
-        { delivery: { $eq: delivery } },
-        { pickedUp: { $eq: pickUp } },
-        { role: "restaurant" },
-
-        // {'deliveryMode.topics.modules.classes.name':{"$in":[/math/]}}
-      ],
-    }
-  )
-    .then(
-      (result) => {
-        console.log("######################");
-        console.log(result);
-
-        // let restNameFilterResp=[];
-        // let dishFilterResp=[];
-        // let categoryFilterResp= [];
-        //      result.filter(el=>{
-        //     if(el.name == (searchTabText)){
-        //        //  console.log(el);
-        //        restNameFilterResp.push(el)
-        //     }
-
-        //     })
-        //     result.filter(el=>{
-        //         el.dishes.filter(item=>{
-        //             if(item.dishName == (searchTabText)){
-        //               //  console.log(item);
-        //               dishFilterResp.push(el);
-        //                // return el
-        //             }
-
-        //         })
-        //     })
-        //       result.filter(el=>{
-        //         el.dishes.filter(item=>{
-        //             if(item.category===(category)){
-        //               //  console.log(item);
-        //               categoryFilterResp.push(el)
-        //                // return el
-        //             }
-
-        //         })
-        //     })
-        // //     console.log('1'+restNameFilterResp.length);
-        // //     console.log('@@@@@@@@@@@@@@@@@@@@');
-        // //     console.log('2'+dishFilterResp.length);
-        // //     console.log('@@@@@@@@@@@@@@@@@@@@');
-
-        // //   console.log('rw'+categoryFilterResp.length);
-
-        // // console.log(restNameFilterResp);
-        // // console.log('set');
-        // if(category=='' && searchTabText==''){
-        //     // console.log('less filters');
-
-        //     // console.log(new Set([...result,...restNameFilterResp,...dishFilterResp,...categoryFilterResp]));
-        //     res.status(200).json(
-        //        [...new Set([...result,...restNameFilterResp,...dishFilterResp,...categoryFilterResp])
-        //      ] )
-        // }
-        // else {
-        //     // console.log(new Set([...restNameFilterResp,...dishFilterResp,...categoryFilterResp]));
-        //     res.send(
-        //         [...new Set([...restNameFilterResp,...dishFilterResp,...categoryFilterResp])]
-        //         )
-
-        // }
-
-        // res.send(new Set([restNameFilterResp,dishFilterResp,categoryFilterResp]))
-        //   res.send({success:true});
-        res.send(result);
-      },
-      (err) => {
-        console.log(err);
-        res.statusCode = 400;
-        res.send({ success: false });
-      }
-    )
-    .catch((err) => {
+  kafka.make_request(
+    "fetchSearchResults",
+    { city, category, searchTabText, delivery, pickUp },
+    function (err, results) {
+      console.log("Inside search");
       console.log(err);
-      res.statusCode = 500;
-      res.send({ success: false });
-    });
+      console.log(results);
+      if (err) {
+        console.log("Inside search" + err);
+        res.status(500).end();
+      } else {
+        res.send(results.data);
+      }
+    }
+  );
 });
 
 router.post("/fav-add", (req, res) => {
@@ -202,7 +101,7 @@ router.post("/favs", (req, res) => {
       console.log("Inside err" + err);
       res.status(500).end();
     } else {
-      res.send(results.data);
+      res.status(results?.statusCode).end();
     }
   });
 });
@@ -220,6 +119,7 @@ router.post("/customer/profile", async (req, res) => {
       console.log("Inside err" + err);
       res.status(500).end();
     } else {
+      res.status(results.statusCode);
       res.send(results.data);
     }
   });
@@ -254,7 +154,7 @@ router.post("/cart/placed", (req, res) => {
     }
   });
 });
-router.post("/cancelled-orders", verifyUser, (req, res) => {
+router.post("/cancelled-orders", (req, res) => {
   console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
   kafka.make_request(
     "getCutomerOrdersCancelled",
@@ -262,18 +162,23 @@ router.post("/cancelled-orders", verifyUser, (req, res) => {
     function (err, results) {
       console.log("Inside order");
       console.log(err);
-      console.log(results);
+
       if (err) {
         console.log("Inside err" + err);
         res.status(500).end();
       } else {
-        res.send(results.data);
+        console.log(results);
+        if (results?.statusCode == 200) {
+          res.status(200).send(results.data);
+        } else {
+          res.status(400).end();
+        }
       }
     }
   );
 });
 
-router.post("/past-orders", verifyUser, (req, res) => {
+router.post("/past-orders", (req, res) => {
   console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
   kafka.make_request("getCutomerOrdersPast", req.body, function (err, results) {
     console.log("Inside order");
@@ -283,12 +188,16 @@ router.post("/past-orders", verifyUser, (req, res) => {
       console.log("Inside err" + err);
       res.status(500).end();
     } else {
-      res.send(results.data);
+      if (results?.statusCode == 200) {
+        res.status(200).send(results.data);
+      } else {
+        res.status(400).end();
+      }
     }
   });
 });
 
-router.post("/active-orders", verifyUser, (req, res) => {
+router.post("/active-orders", (req, res) => {
   console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
   kafka.make_request(
     "getCutomerOrdersActive",
@@ -301,7 +210,11 @@ router.post("/active-orders", verifyUser, (req, res) => {
         console.log("Inside err" + err);
         res.status(500).end();
       } else {
-        res.send(results.data);
+        if (results?.statusCode == 200) {
+          res.status(200).send(results.data);
+        } else {
+          res.status(400).end();
+        }
       }
     }
   );

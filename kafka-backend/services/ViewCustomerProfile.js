@@ -7,8 +7,13 @@ async function handle_request(msg, callback) {
     select('-refreshToken')
     .then(
        result=>{
-        // console.log(result);
-        callback(null, {'statusCode' :200, 'data':result })
+        if(result!==null){
+            callback(null, {'statusCode' :200, 'data':result })
+        }
+        else {
+            callback(null, {'statusCode' :400, 'error':err })
+        }
+
        },
        error=>{
         callback(null, {'statusCode' :500, 'error':err })

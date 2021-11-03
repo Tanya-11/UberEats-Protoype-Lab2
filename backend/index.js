@@ -92,6 +92,22 @@ app.use("/api", customerRouter)
 //---------------------------------------------END OF MIDDLEWARE------------------------------------------------------------
 
 const saltRounds = 10;
+
+
+router.post('/upload/photo', upload.single('image'), (req, res) => {
+  console.log('print' + req.body.username);
+  console.log('img'+req.file.path);
+  Order.findOne({'username':req.body.username}).then(
+    res=>{
+      console.log(res);
+    },
+    err=>{
+      console.log(err);
+    }
+  )
+  .catch(error=>{
+    console.log(error);
+  })
   // let param = '';
   // let sql = ''
   // if (req.body.custId) {
@@ -116,7 +132,7 @@ const saltRounds = 10;
   //     console.log(JSON.stringify(result));
   //   }
   // })
-//});
+});
 
 
 

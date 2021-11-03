@@ -53,7 +53,7 @@ function handleTopicRequest(topic_name,fname){
             producer.send(payloads, function(err, data){
                 console.log(data);
             });
-            return;
+           // return;
         });
         
     });

@@ -14,7 +14,8 @@ const Dashboard = () => {
     const [searchString, setSearchString] = useState('')
     const [searchData, setSearchData] = useState({
         city:JSON.parse(localStorage.getItem('address')).city,
-        mode: 'delivery',
+        delivery: false,
+        pickUp:false,
         category: '',
         searchTabText: '',
     })
@@ -64,7 +65,7 @@ const Dashboard = () => {
     )
 
     const handleChange = (e) => {
-        // console.log(e.target.value)
+         console.log(e.target.name)
         const { name, value } = e.target
         setSearchData((prevSate) => ({
             ...prevSate,
@@ -78,13 +79,15 @@ const Dashboard = () => {
             <div className="leftContent">
                 <div className="mode" onChange={(e) => handleChange(e)}>
                     <label>
-                        <input type="radio" value="delivery" name="mode"
-                            checked={searchData.mode === 'delivery'} />
+                        <input type="checkbox" value={!searchData.delivery} name="delivery"
+                            // checked={searchData.delivery}
+                             />
                         Delivery
                     </label>
                     <label>
-                        <input type="radio" value="pick" name="mode"
-                            checked={searchData.mode === 'pick'} />
+                        <input type="checkbox" value={!searchData.pickUp} name="pickUp"
+                            // checked={searchData.pickUp}
+                             />
                         Pick Up
                     </label>
                     {/* <label>

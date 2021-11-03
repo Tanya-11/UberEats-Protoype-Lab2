@@ -219,13 +219,10 @@ const Cart = () => {
             {orderPlaced && <h2>{cartStatus}</h2>}
 
             {!orderPlaced && cart.length > 0 && (
-                <Button style={{ margin: '3%', float: 'right' }} onClick={placeOrder}>
+                <Button style={{ margin: '3%', float: 'right' }} onClick={setOrderVal}>
                     Place Order
                 </Button>
             )}
-              <Button style={{ margin: '3%', float: 'right' }} onClick={setOrderVal}>
-                    Place 
-                </Button>
         </div>
     )
 }

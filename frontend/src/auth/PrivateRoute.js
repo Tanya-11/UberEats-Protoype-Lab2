@@ -28,8 +28,6 @@ const PrivateRoute = (restOfProps) => {
         
         Axios.post('http://localhost:3001/api/refreshToken')        
        .then( async response => {
-        console.log('6666');
-
          console.log(response);
           if (response) {
             const data =  await response
@@ -44,7 +42,7 @@ const PrivateRoute = (restOfProps) => {
           )
             render = <Route {...restOfProps}></Route>;
           } else {
-   console.log('87678687686');
+   
             dispatch(
               userLogInFail({
                   text:  null ,
@@ -53,7 +51,7 @@ const PrivateRoute = (restOfProps) => {
           )
           }
           // call refreshToken every 5 minutes to renew the authentication token.
-          setTimeout(verifyUser, 5 * 60 * 1000)
+          setTimeout(verifyUser, 50 * 60 * 1000)
         })
         .catch(err=>{
             console.error( err);
@@ -63,7 +61,7 @@ const PrivateRoute = (restOfProps) => {
     
       useEffect(() => {
         verifyUser()
-        console.log('cllllll');
+        console.log();
      }, [verifyUser])
     console.log('this',  restOfProps.path)
     return isAuth? 

@@ -27,12 +27,12 @@ const OrderDetails = () => {
             user: customer,
             page: val,
         })
-            .then( (res) => {
+            .then((res) => {
                 console.log(res.data)
                 let active = []
                 let past = []
                 let cancel = []
-                let response =  res.data
+                let response = res.data
                 setPastOrders(response)
                 // setActiveOrders(active)
                 // setCancelledOrders(cancel)
@@ -41,36 +41,15 @@ const OrderDetails = () => {
                 setErrorMsg('No Data')
             })
     }
-
-    const submit = () => {
-        console.log(cancelledOrders)
-    }
     return (
-         <div>
-    
-        {/* //     <div className="left-content"> */}
-                {/* <ul>
-                    <li onClick={() => setIndex(0)}>{pastOrders.length}</li>
-                    <li onClick={() => setIndex(1)}>{activeOrders.length}</li>
-                    <li onClick={() => setIndex(2)}>{cancelledOrders.length}</li>
-                </ul> */}
-                <Nav defaultActiveKey="/dashboard/order-details/past-orders" className="flex-column">
+        <div>
+            <Nav defaultActiveKey="/dashboard/order-details/past-orders" className="flex-column">
                 <Nav.Link href="/dashboard/order-details/past-orders">Past Orders</Nav.Link>
-                <Nav.Link href="/dashboard/order-details/cancelled-orders">Cancelled Orders</Nav.Link>
+                <Nav.Link href="/dashboard/order-details/cancelled-orders">
+                    Cancelled Orders
+                </Nav.Link>
                 <Nav.Link href="/dashboard/order-details/active-orders">Active Orders</Nav.Link>
-
             </Nav>
-        {/* //    </div> */}
-            {/* <div className="right-content">
-                Click On Side Menu to look up for an Order
-                {/* {errorMsg && <div>{errorMsg}</div>}
-                {index === 0 && <Orders data={pastOrders} load={loadOrders} />}
-                {index === 1 && <Orders data={activeOrders} load={loadOrders} />}
-                {index === 2 && <Orders data={cancelledOrders} load={loadOrders} />} */}
-            {/* // </div>
-            <span></span> */}
-            {/* <Pagination count={5} onClick={(e) => loadOrders(e.target.innerText)} /> */}
-
         </div>
     )
 }

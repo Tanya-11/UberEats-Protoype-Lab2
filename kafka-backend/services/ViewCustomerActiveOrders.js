@@ -4,10 +4,10 @@ const {Dishes,Order} =  require('../models/orders')
 const orders = require("../models/orders")
 async function handle_request(msg, callback) {
     console.log('user'+msg);
-    Order.find(
+    Order.findOne(
         {
             $and: [   
-            {'orders.customer.username':msg.user},
+            {'customer.username':msg.user},
             {$and: [
                 {'orderStatus':{ $ne: 'Delivered'}},
                 {'orderStatus':{ $ne: 'PickedUp'}},
@@ -20,7 +20,12 @@ async function handle_request(msg, callback) {
         ).then(
         resp=>{
            console.log(resp);
-           callback(null, {'statusCode' :200, 'data':resp })
+           if(resp!==null){
+            callback(null, {'statusCode' :200, 'data':resp })
+        }
+        else {
+            callback(null,{'statusCode' :400 } )
+        }
 
         },
         err=>{

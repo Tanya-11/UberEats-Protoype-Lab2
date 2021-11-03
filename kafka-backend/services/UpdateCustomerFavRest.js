@@ -13,10 +13,8 @@ async function handle_request(msg, callback) {
                     callback(null, {'statusCode' :500, 'err':err })
 
                    } else {    
-                     //   console.log(resp);   
-                       res.statusCode=400;
-                       res.send({success:false});   
-                       callback(null, {'statusCode' :500, 'data':result.fav })
+                     //   console.log(resp);     
+                       callback(null, {'statusCode' :200, 'data':result.fav })
      
                     // res.send({ success: true, token })
                    }
