@@ -9,7 +9,7 @@
  
  Step 5. Install `Zookeeper` and `Apache Kafka`
  
- Step 6. Run the commands from kafka-scripts.txt file
+ Step 6. Run the commands from `kafka-scripts.txt` file to run zookeeper and kafka-server and create topics.
  
  Step 7. Go to `backend folder`, run `npm start`
  
