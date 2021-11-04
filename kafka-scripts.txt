@@ -1,6 +1,8 @@
+// To start zookeeper and kafka server
 .\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
 .\bin\windows\kafka-server-start.bat .\config\server.properties
-kafka-topics.bat --list --zookeeper localhost:2181
+
+//To create topics
 
 .\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic userSignup
 .\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic userLogin
@@ -23,5 +25,8 @@ kafka-topics.bat --list --zookeeper localhost:2181
 .\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic getCutomerOrdersPast
 .\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic getCutomerOrdersCancelled
 .\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic getCutomerOrdersActive
+
+// To list all the topics
+.\bin\windows\kafka-topics.bat --list --zookeeper localhost:2181 
 
 

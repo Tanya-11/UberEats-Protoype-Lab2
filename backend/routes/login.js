@@ -15,45 +15,6 @@ const {
 } = require("../auth");
 
 router.post("/signup", async (req, res, next) => {
-  // Verify that username name is not empty
-  // if (!req.body.username) {
-  //   res.statusCode = 500
-  //   res.send({
-  //     name: "UserName Error",
-  //     message: "The username name is required",
-  //   })
-  // } else {
-  //   Users.register(
-  //     new Users({ username: req.body.username }),
-  //     req.body.password,
-  //     (err, user) => {
-  //       if (err) {
-  //     //   console.log('error'+err);
-  //         res.statusCode = 500
-  //         res.send(err)
-  //       } else {
-  //         //  console.log('user'+user);
-  //         user.username = req.body.username
-  //         user.role= req.body.persona
-  //         const token = getToken({ _id: user._id })
-  //         const refreshToken = getRefreshToken({ _id: user._id })
-  //     //    console.log('user'+refreshToken);
-  //     //    console.log("refresh"+user);
-  //         user.refreshToken.push({ refreshToken })
-  //         user.save((err, user) => {
-  //           if (err) {
-  //             res.statusCode = 500
-  //             res.send(err)
-  //           } else {
-  //             res.cookie("refreshToken", refreshToken, COOKIE_OPTIONS)
-  //             res.send({ success: true, token,user:user._id })
-  //           }
-  //         })
-  //       }
-  //     }
-  //   )
-  //  }
-
   kafka.make_request("userSignup", req.body, function (err, results) {
     console.log("Inside signUp");
     console.log(err);
@@ -70,7 +31,6 @@ router.post("/signup", async (req, res, next) => {
 });
 
 router.post("/login", passport.authenticate("local"), (req, res, next) => {
-  console.log("reqloginnnnnnnnnnn" + req);
   const token = getToken({ _id: req.user._id });
   const body = {
     _id: req.user._id,
@@ -100,7 +60,7 @@ router.post("/login", passport.authenticate("local"), (req, res, next) => {
   });
 });
 
-  router.post("/refreshToken", (req, res, next) => {
+  router.get("/refreshToken", (req, res, next) => {
     //  console.log(JSON.parse(req)+"req refreshhhhhhhhhhhhhhhhhhhhh");
     const { signedCookies = {} } = req
    // console.log(signedCookies);
@@ -113,7 +73,7 @@ router.post("/login", passport.authenticate("local"), (req, res, next) => {
           refreshToken: refreshToken,
           userId: payload._id,
         };
-     console.log('##################id'+JSON.stringify(payload));
+   //  console.log('##################id'+JSON.stringify(payload));
         const userId = payload._id
       //  console.log('##################id'+userId);
       kafka.make_request("refreshToken", body, function (err, results) {
@@ -123,14 +83,12 @@ router.post("/login", passport.authenticate("local"), (req, res, next) => {
           res.statusCode = 500;
           res.send(err);
         } else {
+          if(results.statusCode!==200){
+             res.status(401);
+          }
           console.log(results);
           res.cookie("refreshToken", refreshToken, COOKIE_OPTIONS);
-          res.send(results.token);
-          // console.log(results);
-          //   res.cookie("refreshToken", results.refreshToken, COOKIE_OPTIONS)
-          //  res.send({ success: true, token:token,address:results.addressLine1, user:results.user })
-          // res.cookie("refreshToken", results?.refreshToken, COOKIE_OPTIONS)
-          // res.send({ success: true, token : results.token,user:results.user })
+          res.send(results);
         }
       });
       
@@ -149,7 +107,7 @@ router.post("/logout", (req, res, next) => {
  
   const { signedCookies = {} } = req;
   const { refreshToken } = signedCookies;
-  console.log('logout'+refreshToken);
+ // console.log(req);
   const body = {
     refreshToken: refreshToken,
     _id: req.body.user,
@@ -176,34 +134,6 @@ router.post("/logout", (req, res, next) => {
   });
   
 });
-//   Users.findById(req.user._id).then(
-//     user => {
-//       const tokenIndex = user.refreshToken.findIndex(
-//         item => item.refreshToken === refreshToken
-//       )
 
-//       if (tokenIndex !== -1) {
-//         user.refreshToken.id(user.refreshToken[tokenIndex]._id).remove()
-//       }
-
-//       user.save((err, user) => {
-//         if (err) {
-
-//           res.statusCode = 500
-//           res.send(err)
-//         } else {
-//           res.clearCookie("refreshToken", COOKIE_OPTIONS)
-//           res.send({ success: true })
-//         }
-//       })
-//     },
-//     err => console.log(err)
-//   )
-// })
-
-//   router.get("/me", verifyUser, (req, res, next) => {
-//     // console.log('verify'+req.user);
-//     res.send(req.user)
-//   })
 
 module.exports = router;

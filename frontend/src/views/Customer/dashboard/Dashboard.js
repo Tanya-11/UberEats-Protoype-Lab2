@@ -3,7 +3,6 @@ import Axios from 'axios'
 import { useSelector } from 'react-redux'
 import RestCard from '../../common/RestCard'
 import './Dashboard.scss'
-import { AuthContext } from "../../../contexts/customerContext"
 
 const Dashboard = () => {
     const [restData, setrestData] = useState([])
@@ -41,14 +40,12 @@ const Dashboard = () => {
         user: customer,
     })
     useEffect(() => {
-        // console.log('ggg'+JSON.parse(localStorage.getItem('address')).city);
-
         Promise.all([getRestData, getFavData])
             .then((res) => {
                 console.log("resul############");
                 console.log(res)
                 res[0].data.map((el) => {
-                    res[1].data.map((item) => {
+                    res[1].data.data.map((item) => {
                         if (el.username === item.restaurant) {
                             console.log(item)
                             el.isFav = true

@@ -3,31 +3,49 @@ const {Users} = require('../models/users')
 const {Dishes,Order} =  require('../models/orders')
 const orders = require("../models/orders")
 async function handle_request(msg, callback) {
+   // console.log(msg);
     Users.findOne({username:msg.user}).then(
         result=>{
-             // console.log(result);
-             result?.fav.push({restaurant:msg.restaurant});
+             if(msg?.restaurant && msg?.restaurant!==""){
+                 if(msg.isFav===true){
+                     result.fav.push({restaurant:msg.restaurant});
+                 }
+                 else{
+                     result.fav =  result.fav.filter(item => item.restaurant !== msg.restaurant);
+ 
+                     // let index  = result.fav.indexOf(msg.restaurant)
+                   //  console.log(found);
+                     // result.fav.splice(index,1);
+                  
+                 }
+                 result.save((resp,error)=>{
+                     if (error) {
+                     //  res.statusCode = 500
+                     // res.send(error)
+                     callback(null, {'statusCode' :500, 'err':error })
 
-             result.save((resp,error)=>{
-                 if (error) {
-                    callback(null, {'statusCode' :500, 'err':err })
+                       } else {    
+                           console.log(resp);   
+                         //   res.statusCode=400;
+                         //   res.send({success:false});        
+                        // res.send({ success: true, token })
+                        callback(null, {'statusCode' :200 })
 
-                   } else {    
-                     //   console.log(resp);     
-                       callback(null, {'statusCode' :200, 'data':result.fav })
-     
-                    // res.send({ success: true, token })
-                   }
-             })
+                       }
+                 })
+                callback(null, {'statusCode' :200 })      
+
+             } 
+             else
+             callback(null, {'statusCode' :400})      
         },
         err=>{
-         console.log(err);
-         callback(null, {'statusCode' :500, 'err':err })
+            callback(null, {'statusCode' :500, 'err':err })
 
         }
      )
-     .catch(err=>{
-        callback(null, {'statusCode' :500, 'err':err })
+     .catch(error=>{
+        callback(null, {'statusCode' :590, 'err':error })
 
      })
 }

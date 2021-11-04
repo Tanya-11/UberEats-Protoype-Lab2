@@ -9,18 +9,19 @@ const {
 } = require("../../backend/auth");
 
 async function handle_request(msg, callback) {
-  console.log(msg);
+  // console.log(msg);
 
   Users.findOne({ _id: msg.userId }).then(
     (user) => {
       if (user) {
-        console.log(user);
+        // console.log(user);
 
         // Find the refresh token against the user record in database
         const tokenIndex = user.refreshToken.findIndex(
           (item) => item.refreshToken === msg.refreshToken
         );
-        //  console.log(tokenIndex);
+        console.log('inrefersh');
+          console.log(tokenIndex);
         if (tokenIndex === -1) {
             callback(null, {'statusCode' :401, 'err':'Unauthorized' })
 
@@ -28,8 +29,10 @@ async function handle_request(msg, callback) {
           const token = getToken({ _id: msg.userId });
           // If the refresh token exists, then create new one and replace it.
           const newRefreshToken = getRefreshToken({ _id: msg.userId });
-          user.refreshToken[tokenIndex] = { refreshToken: msg.newRefreshToken };
-          // console.log(newRefreshToken);
+          user.refreshToken[tokenIndex] = { refreshToken: newRefreshToken };
+          console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
+          console.log('inrefersh');
+          console.log(newRefreshToken);
           user.save((err, resp) => {
             if (err) {
                 callback(null, {'statusCode' :500, 'err':err })

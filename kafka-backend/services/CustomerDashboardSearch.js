@@ -39,8 +39,8 @@ async function handle_request(msg, callback) {
       )
         .then(
           (result) => {
-            console.log("######################");
-            console.log(result);
+            // console.log("######################");
+            // console.log(result);
             callback(null, {'statusCode' :200, 'data':result })
         },
           (err) => {

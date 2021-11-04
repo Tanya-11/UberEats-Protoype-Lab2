@@ -24,12 +24,13 @@ import { useSelector} from 'react-redux'
 
 import Axios from 'axios'
 function App() {
-    const userLoginStatus = useSelector((state) => state.userLogin)
-    const restLoginStatus =  useSelector((state) => state.restLogin)
+    const store = useSelector((state) => state)
+    let token;
 
- 
+    if(store?.role==='customer')  token = store?.userLogin?.token
+    else  token = store?.restLogin?.token
     Axios.defaults.headers.common = {
-        'Authorization': 'Bearer ' + userLoginStatus?.token
+        'Authorization': 'Bearer ' + token
     };
     // Axios.defaults.withCredentials=true;
     // const verifyUser = useCallback( () => {

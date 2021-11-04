@@ -4,19 +4,6 @@ import styles from './Persona.module.scss'
 
 const Persona = () => {
     const history = useHistory()
-    const goToRest = () => {
-        history.push({
-            pathname: '/restOwner-login',
-            state: { user: 'restaurant' },
-        })
-    }
-
-    const goToUser = () => {
-        history.push({
-            pathname: '/user-login',
-            state: { user: 'user' },
-        })
-    }
     return (
         <div className={styles.Persona} data-testid="Persona">
             <h1>UberEats</h1>

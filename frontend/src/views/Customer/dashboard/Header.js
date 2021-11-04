@@ -1,21 +1,17 @@
 import Axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import './Header.scss'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
 import Modal from '../../common/Modal/Modal'
 import CartModal from '../cart/CartModal'
 
 const Header = () => {
-    const [deliveryMode, setDeliveryMode] = useState(true)
-    const [location, setLocation] = useState('')
-    const [searchString, setSearchString] = useState('')
     const [isPopUp, setIsPopUp] = useState(false)
     const history = useHistory()
-    const dispatch = useDispatch()
     const [showCartPopUp, setCartPopUp] = useState(false)
-    const count = useSelector((state) => state.cart)
+    const count = useSelector((state) => state?.cart)
     const [cartLen, setCartLen] = useState(0)
     Axios.defaults.withCredentials = true
 

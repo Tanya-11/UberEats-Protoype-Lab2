@@ -78,30 +78,24 @@ router.post("/search", verifyUser, (req, res) => {
 router.post("/fav-add", (req, res) => {
   console.log(req.body.restaurant);
   kafka.make_request("setFav", req.body, function (err, results) {
-    console.log("Inside signUp");
+    console.log("SETFAV");
     console.log(err);
-    console.log(results);
+    console.log(results.data);
     if (err) {
       console.log("Inside err" + err);
       res.status(500).end();
     } else {
-      res.send(results.data);
+      res.send(results);
     }
   });
 });
 
 router.post("/favs", (req, res) => {
-  console.log("##############################################");
-  console.log(req.body);
   kafka.make_request("fetchFav", req.body, function (err, results) {
-    console.log("Inside signUp");
-    console.log(err);
-    console.log(results);
     if (err) {
-      console.log("Inside err" + err);
       res.status(500).end();
     } else {
-      res.status(results?.statusCode).end();
+      res.send(results);
     }
   });
 });
@@ -112,11 +106,7 @@ router.get("/me", (req, res, next) => {
 });
 router.post("/customer/profile", async (req, res) => {
   kafka.make_request("customerProfile", req.body, function (err, results) {
-    console.log("Inside signUp");
-    console.log(err);
-    console.log(results);
     if (err) {
-      console.log("Inside err" + err);
       res.status(500).end();
     } else {
       res.status(results.statusCode);
@@ -155,19 +145,13 @@ router.post("/cart/placed", (req, res) => {
   });
 });
 router.post("/cancelled-orders", (req, res) => {
-  console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
   kafka.make_request(
     "getCutomerOrdersCancelled",
     req.body,
     function (err, results) {
-      console.log("Inside order");
-      console.log(err);
-
-      if (err) {
-        console.log("Inside err" + err);
+       if (err) {
         res.status(500).end();
       } else {
-        console.log(results);
         if (results?.statusCode == 200) {
           res.status(200).send(results.data);
         } else {
@@ -179,13 +163,8 @@ router.post("/cancelled-orders", (req, res) => {
 });
 
 router.post("/past-orders", (req, res) => {
-  console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
   kafka.make_request("getCutomerOrdersPast", req.body, function (err, results) {
-    console.log("Inside order");
-    console.log(err);
-    console.log(results);
     if (err) {
-      console.log("Inside err" + err);
       res.status(500).end();
     } else {
       if (results?.statusCode == 200) {
@@ -198,16 +177,11 @@ router.post("/past-orders", (req, res) => {
 });
 
 router.post("/active-orders", (req, res) => {
-  console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
   kafka.make_request(
     "getCutomerOrdersActive",
     req.body,
     function (err, results) {
-      console.log("Inside order");
-      console.log(err);
-      console.log(results);
       if (err) {
-        console.log("Inside err" + err);
         res.status(500).end();
       } else {
         if (results?.statusCode == 200) {

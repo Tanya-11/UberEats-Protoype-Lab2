@@ -4,10 +4,10 @@ let server = require('../index');
 chai.should();
 chai.use(chaiHttp);
 
-describe('POST /favs', () => {
+describe('POST /fav-add', () => {
     it('It should get favorites', (done) => {
         chai.request(server)
-            .post('/api/favs')
+            .post('/api/fav-add')
             .send({ user: "user@gmail.com", restaurant: "paradise@gmail.com", isFav: false })
             .end((err, response) => {
                 response.should.have.status(200);
