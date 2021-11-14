@@ -25,7 +25,7 @@ const CustomerActiveOrders = () => {
     }, [pageSize, pageNo])
 
     const loadOrders = (pageSize, pageNo) => {
-        Axios.post('http://18.224.59.255:3001/api/active-orders', {
+        Axios.post('http://3.141.193.70:3001/api/active-orders', {
             user: customer,
             size: pageSize,
             pageNo: pageNo,
@@ -62,7 +62,7 @@ const CustomerActiveOrders = () => {
 
     const cancelOrder = (item) => {
         console.log(item)
-        Axios.post('http://18.224.59.255:3001/api/orders/update/status', {
+        Axios.post('http://3.141.193.70:3001/api/orders/update/status', {
             orderId: item._id,
             orderStatus: 'Cancelled',
             date: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),

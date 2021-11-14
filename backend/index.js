@@ -59,7 +59,7 @@ app.use('/images', express.static('images'));
 app.use(
   cors(
     {
-      origin: 'http://18.224.59.255:3000',
+      origin: 'http://3.141.193.70:3000',
       // methods: ["GET", "POST", "PUT", "PATCH"],
       credentials: true,
     }

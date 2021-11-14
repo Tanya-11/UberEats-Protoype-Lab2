@@ -21,7 +21,7 @@ const ViewOrder = () => {
     }, [])
 
     const getDishData = () => {
-        Axios.post('http://18.224.59.255:3001/api/dishes', {
+        Axios.post('http://3.141.193.70:3001/api/dishes', {
             username: restaurant,
         })
             .then((res) => {
