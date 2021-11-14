@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import AddIcon from '@mui/icons-material/Add'
 import { useDispatch, useSelector } from 'react-redux'
-import styles from './RestDishCard.module.scss'
+import './RestDishCard.css'
 import { userOrderIncrement } from '../../../redux/actions/actions'
 import NewOrderModal from './newOrderModal'
 
@@ -40,15 +40,15 @@ const RestDishCard = (props) => {
     }
 
     return (
-        <div className={styles.RestDishCard} data-testid="RestDishCard">
+        <div class="RestDishCard">
             {<span>{errorMsg}</span>}
-            <div className={styles.RestDishCardWrapper}>
-                <div className={styles.dishImage}>
-                    <div className={styles.dishAddIcon} onClick={addToCart}>
+            <div class="RestDishCardWrapper">
+                <div class="dishImage">
+                    <div class="dishAddIcon" onClick={addToCart}>
                         <AddIcon />
                     </div>
                 </div>
-                <div className={styles.dishDetail}>
+                <div class="dishDetail">
                     <div>
                         <em>{props.dishes.dishName}</em>
                     </div>

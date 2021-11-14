@@ -1,29 +1,29 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import styles from './Persona.module.scss'
+import './Persona.css'
 
 const Persona = () => {
     const history = useHistory()
     return (
-        <div className={styles.Persona} data-testid="Persona">
+        <div class="Persona">
             <h1>UberEats</h1>
-            <div className={styles.PersonaWrapper}>
+            <div class="PersonaWrapper">
                 <div
-                    className={styles.restaurant}
+                    class="restaurant"
                     onClick={() => {
                         history.push('/restaurant-login')
                     }}
                 >
-                    <div className={styles.restaurantImg}></div>
+                    <div class="restaurantImg"></div>
                     <h2>Restaurant owner</h2>
                 </div>
                 <div
-                    className={styles.customer}
+                    class="customer"
                     onClick={() => {
                         history.push('/user-login')
                     }}
                 >
-                    <div className={styles.customerImg}></div>
+                    <div class="customerImg"></div>
                     <h2>User</h2>
                 </div>
             </div>

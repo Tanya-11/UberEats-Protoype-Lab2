@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
-import styles from './RestCardDetail.module.scss'
+import './RestCardDetail.css'
 import RestDishCard from '../RestDishCard/RestDishCard'
 
 const RestCardDetail = () => {
@@ -33,20 +33,20 @@ const RestCardDetail = () => {
     // }
 
     return (
-        <div className={styles.RestCardDetail} data-testid="RestCardDetail">
-            <div className={styles.RestImg}>
-                {image && <img src={`http://18.191.91.254:3001/api/images/${image}`} />}
+        <div class="RestCardDetail">
+            <div class="RestImg">
+                {image && <img src={`http://3.129.16.0:3001/api/images/${image}`} />}
             </div>
-            <div className={styles.RestdescWrapper}>
-                <div className={styles.Restdesc}>
-                    <div className="name">
+            <div class="RestdescWrapper">
+                <div class="Restdesc">
+                    <div class="name">
                         {dish.name}({dish?.addressLine1})
                     </div>
-                    <div className="desc">{dish?.description}</div>
-                    <div className="open-hrs">{dish?.openHrs}</div>
+                    <div class="desc">{dish?.description}</div>
+                    <div class="open-hrs">{dish?.openHrs}</div>
                 </div>
-                <div className={styles.dishcardWrapper}>
-                    <div className={styles.dishcards}>
+                <div class="dishcardWrapper">
+                    <div class="dishcards">
                         { dish?.dishes?.length>0 && dish?.dishes.map((result, i) => (
                             <RestDishCard key={i} dishes={result} restName={dish.name} restId={dish.username}></RestDishCard>
                         ))}

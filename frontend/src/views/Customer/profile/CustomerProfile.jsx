@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './CustomerProfile.scss'
+import './CustomerProfile.css'
 import Axios from 'axios'
 import { useSelector } from 'react-redux'
 // import RestCard from '../common/RestCard'
@@ -36,7 +36,7 @@ const CustomerProfile = () => {
     }, [])
 
     const getCustomerData = () => {
-        Axios.post('http://18.191.91.254:3001/api/customer/profile', {
+        Axios.post('http://3.129.16.0:3001/api/customer/profile', {
             username: customer,
         })
             .then((res) => {
@@ -82,15 +82,15 @@ const CustomerProfile = () => {
     }
 
     return (
-        <div className="CustomerProfile">
-            <div className="leftContent">
+        <div class="CustomerProfile">
+            <div class="leftContent">
                 <ul>
-                    <li className="uber-logo" onClick={navigateToDashboard}></li>
+                    <li class="uber-logo" onClick={navigateToDashboard}></li>
                     <li onClick={setShowState}>About</li>
                     <li onClick={setShowState}>Favorites</li>
                 </ul>
             </div>
-            <div className="rightContent">
+            <div class="rightContent">
                 {!showAbout && userData ? (
                     <About data={userData} disabled={false}  />
                 ) : (

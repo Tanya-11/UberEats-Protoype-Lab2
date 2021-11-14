@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Component } from 'react'
-import './Orders.scss'
+import './Orders.css'
 import { Col, Container, Row, Badge, Alert, Button } from 'react-bootstrap'
 import * as moment from 'moment'
 import ReceiptModal from './ReceiptModal'
@@ -27,7 +27,7 @@ const PastOrders = () => {
     }, [pageSize, pageNo])
 
     const loadOrders = async (pageSize, pageNo) => {
-        const response = await Axios.post('http://18.191.91.254:3001/api/past-orders', {
+        const response = await Axios.post('http://3.129.16.0:3001/api/past-orders', {
             user: customer,
             size: pageSize,
             pageNo: pageNo,
@@ -75,7 +75,7 @@ const PastOrders = () => {
                  </Alert>
                 )}
                 {pastOrders.map((el, index) => (
-                    <div className="order-box" key={index}>
+                    <div class="order-box" key={index}>
                         <Row>
                             <Col md={6}>
                                 <span>

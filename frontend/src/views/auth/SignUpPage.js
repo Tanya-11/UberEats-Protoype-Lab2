@@ -3,7 +3,7 @@ import { Redirect } from 'react-router'
 import { connect, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { userLogInSuccess, userLogInFail, restLogInSuccess, restLogInFail } from '../../redux/actions/actions'
-import './AuthN.scss'
+import './AuthN.css'
 import Axios from 'axios'
 import { Alert } from 'react-bootstrap'
 
@@ -45,7 +45,7 @@ const SignUpPage = (props) => {
         }
     }, [])
     const onSignUpClicked = () => {
-        Axios.post('http://18.191.91.254:3001/api/signup', {
+        Axios.post('http://3.129.16.0:3001/api/signup', {
             name: nameValue,
             username: emailValue,
             password: passwordValue,
@@ -95,16 +95,16 @@ const SignUpPage = (props) => {
         history.push('/')
     }
     return (
-        <div className="login-container">
-            <div className="login-wrapper">
-                <div className="logo" onClick={goToPersons} />
+        <div class="login-container">
+            <div class="login-wrapper">
+                <div class="logo" onClick={goToPersons} />
                 <h1>Let's get started</h1>
                 {errorMsg && (
-                    <Alert variant="danger" className="fail">
+                    <Alert variant="danger" class="fail">
                         {errorMsg}
                     </Alert>
                 )}
-                <div className="login-form">
+                <div class="login-form">
                     <input
                         value={nameValue}
                         onChange={(e) => setNameValue(e.target.value)}

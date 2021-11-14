@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './Profile.scss'
+import './Profile.css'
 import { Navbar, NavDropdown, Nav, Container } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { USER_LOGOUT } from '../../redux/actions/actions'
@@ -23,7 +23,7 @@ class RestProfile extends Component {
                     <Navbar.Brand>Restaurant Dashboard</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto" activeKey="/rest-dashboard/about">
+                        <Nav class="me-auto" activeKey="/rest-dashboard/about">
                             <Nav.Link href="/rest-dashboard/about">About</Nav.Link>
                             <Nav.Link href="/rest-dashboard/dishes">View/Edit/Add Dishes</Nav.Link>
                             <NavDropdown title="Orders" id="basic-nav-dropdown">

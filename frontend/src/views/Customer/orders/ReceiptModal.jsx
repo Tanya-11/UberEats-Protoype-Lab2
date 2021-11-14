@@ -39,7 +39,7 @@ class ReceiptModal extends React.Component {
                         </Button>
                     </Modal.Header>
                     <Modal.Body>
-                        <table className="table">
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <td>Quantity</td>

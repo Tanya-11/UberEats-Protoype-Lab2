@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import LogoutIcon from '@mui/icons-material/Logout'
 import * as ACTIONS from '../../../redux/actions/actions'
-import styles from './Modal.module.scss'
+import './Modal.css'
 import Axios from 'axios';
 
 const Modal = () => {
@@ -14,7 +14,7 @@ const Modal = () => {
 
 
     const logOut = () => {
-        Axios.post('http://18.191.91.254:3001/api/logout',{
+        Axios.post('http://3.129.16.0:3001/api/logout',{
             user:customer.user_id
         })
         .then(res=>{
@@ -26,7 +26,7 @@ const Modal = () => {
         .catch(err=>console.log(err))
     }
     return (
-        <div className={styles.Modal} data-testid="Modal">
+        <div class="Modal">
             <ul>
                 <li
                     onClick={() => {

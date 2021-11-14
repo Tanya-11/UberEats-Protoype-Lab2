@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Axios from 'axios'
-import './Profile.scss'
+import './Profile.css'
 import { Button } from 'react-bootstrap'
 import NativeSelect from '@mui/material/NativeSelect'
 
@@ -49,7 +49,7 @@ const About = () => {
     }
     const getRestData = () => {
         console.log(restaurant)
-        Axios.get(`http://18.191.91.254:3001/api/profile/${restaurant}`)
+        Axios.get(`http://3.129.16.0:3001/api/profile/${restaurant}`)
             .then((res) => {
                 console.log(res)
                 console.log(res.data)
@@ -144,10 +144,10 @@ const About = () => {
                 'content-type': 'multipart/form-data',
             },
         }
-        const setProfile = Axios.post('http://18.191.91.254:3001/api/profile', {
+        const setProfile = Axios.post('http://3.129.16.0:3001/api/profile', {
             restData,
         })
-        const setPhoto = Axios.post('http://18.191.91.254:3001/api/upload/photo', formData, config)
+        const setPhoto = Axios.post('http://3.129.16.0:3001/api/upload/photo', formData, config)
         Promise.all([setProfile, setPhoto])
             .then((res) => {
                 console.log(JSON.parse(res[0].config.data))
@@ -167,7 +167,7 @@ const About = () => {
         // })
     }
     return (
-        <div className="rightContent">
+        <div class="rightContent">
             {image && (
                 <img
                     style={{
@@ -177,10 +177,10 @@ const About = () => {
                         margin: '12%',
                         float: 'right',
                     }}
-                    src={`http://18.191.91.254:3001/api/images/${image}`}
+                    src={`http://3.129.16.0:3001/api/images/${image}`}
                 />
             )}
-            <label className="label">
+            <label class="label">
                 Name:
                 <input
                     type="text"
@@ -189,7 +189,7 @@ const About = () => {
                     value={restData.name}
                 ></input>
             </label>
-            <label className="label">
+            <label class="label">
                 Email
                 <input
                     type="text"
@@ -198,7 +198,7 @@ const About = () => {
                     value={restData.username}
                 ></input>
             </label>
-            <label className="label">
+            <label class="label">
                 Phone
                 <input
                     type="number"
@@ -207,7 +207,7 @@ const About = () => {
                     value={restData.phoneNo}
                 ></input>
             </label>
-            <label className="label">
+            <label class="label">
                 Address
                 <input
                     name="addressLine1"
@@ -215,7 +215,7 @@ const About = () => {
                     value={restData.addressLine1}
                 ></input>
             </label>
-            <label className="label">
+            <label class="label">
                 City
                 <input
                     type="text"
@@ -224,7 +224,7 @@ const About = () => {
                     value={restData.city}
                 ></input>
             </label>
-            <label className="label">
+            <label class="label">
                 State
                 <input
                     type="text"
@@ -233,7 +233,7 @@ const About = () => {
                     value={restData.state}
                 ></input>
             </label>
-            <label className="label">
+            <label class="label">
                 Country
                 <NativeSelect
                     inputProps={{
@@ -250,7 +250,7 @@ const About = () => {
 
                 </NativeSelect>
             </label>
-            <label className="label">
+            <label class="label">
                 Opening Hrs
                 <input
                     type="time"
@@ -272,10 +272,10 @@ const About = () => {
                 ></input>
             </label>
             <div
-                className="mode"
+                class="mode"
                 //  onChange={(e) => handleChange(e)}
             >
-                <label className="label">
+                <label class="label">
                     Mode:
                     <label style={{ width: '100px' }}>
                         <input
@@ -330,7 +330,7 @@ const About = () => {
             <Button
                 variant="primary"
                 type="submit"
-                className="submit-button"
+                class="submit-button"
                 disabled={!changed}
                 onClick={submitRestaurantData}
             >

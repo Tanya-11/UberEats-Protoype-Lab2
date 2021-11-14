@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 import Axios from 'axios'
 import { useSelector } from 'react-redux'
 import RestCard from '../../common/RestCard'
-import './Dashboard.scss'
+import './Dashboard.css'
 
 const Dashboard = () => {
     const [restData, setrestData] = useState([])
@@ -21,11 +21,11 @@ const Dashboard = () => {
     Axios.defaults.withCredentials = true
 
 
-    const getRestData = Axios.post('http://18.191.91.254:3001/api/search', {
+    const getRestData = Axios.post('http://3.129.16.0:3001/api/search', {
         searchData:searchData
     })
 
-    const getFavData = Axios.post('http://18.191.91.254:3001/api/favs', {
+    const getFavData = Axios.post('http://3.129.16.0:3001/api/favs', {
         user: customer,
     })
     useEffect(() => {
@@ -58,9 +58,9 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="dashboardContent">
-            <div className="leftContent">
-                <div className="mode" onChange={(e) => handleChange(e)}>
+        <div class="dashboardContent">
+            <div class="leftContent">
+                <div class="mode" onChange={(e) => handleChange(e)}>
                     <label>
                         <input type="checkbox" value={!searchData.delivery} name="delivery"
                             // checked={searchData.delivery}
@@ -79,7 +79,7 @@ const Dashboard = () => {
                         Both
                     </label> */}
                 </div>
-                <div className="location">
+                <div class="location">
                     <input
                         type="text"
                         name="city"
@@ -88,7 +88,7 @@ const Dashboard = () => {
                         placeholder="search City"
                     />
                 </div>
-                <div className="category" onChange={(e) => handleChange(e)}>
+                <div class="category" onChange={(e) => handleChange(e)}>
                     <label>
                         <input type="radio" value="Vegetarian" name="category"
                             checked={searchData.category === 'Vegetarian'} />
@@ -100,7 +100,7 @@ const Dashboard = () => {
                         Halal
                     </label>
                 </div>
-                <div className="search">
+                <div class="search">
                     <input
                         type="text"
                         name="searchTabText"
@@ -110,7 +110,7 @@ const Dashboard = () => {
                     />
                 </div>
             </div>
-            <div className="rightContent">
+            <div class="rightContent">
                 {restData && restData.length>0 &&  restData.map((result, i) => (
                     <RestCard key={i} data={result}></RestCard>
                 ))}

@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { useContext, useCallback, useEffect } from 'react'
 import SignUpPage from './views/auth/SignUpPage'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import './App.scss'
+import './App.css'
 import Dashboard from './views/Customer/dashboard/Dashboard'
 import Persona from '@views/common/Persona/Persona'
 import { LoginPage } from '@views/auth/LogInPage'
@@ -34,7 +34,7 @@ function App() {
     };
     // Axios.defaults.withCredentials=true;
     // const verifyUser = useCallback( () => {
-    //     Axios.post('http://18.191.91.254:3001/api/refreshToken')        
+    //     Axios.post('http://3.129.16.0:3001/api/refreshToken')        
     //    .then(async response => {
     //        console.log("res");
     //       if (response.status==200) {
@@ -61,7 +61,7 @@ function App() {
     //   }, [verifyUser])
     
     return (
-        <div className="parent-container">
+        <div class="parent-container">
             <Router>
                 <Route path="/" exact>
                     <Persona />
@@ -79,10 +79,10 @@ function App() {
                     <SignUpPage data={'restaurant'} />
                 </Route>
                  <PrivateRoute path="/dashboard">
-                    <div className="header">
+                    <div class="header">
                         <Header />
                     </div>
-                    <div className="mainContent">
+                    <div class="mainContent">
                         <Route path="/dashboard" exact>
                             <Dashboard></Dashboard>
                         </Route>
@@ -99,11 +99,11 @@ function App() {
 
 
                         <Route path="/dashboard/order-details" >
-                        <div className="customer-orders">
-                        <div className="left-content">
+                        <div class="customer-orders">
+                        <div class="left-content">
                         <OrderDetails/>
                         </div>
-                        <div className="right-content">
+                        <div class="right-content">
                         <Route path="/dashboard/order-details/past-orders" exact>
                             <PastOrders></PastOrders>
                         </Route>
@@ -131,15 +131,15 @@ function App() {
                     <CustomerProfile />
                 </PrivateRoute>
                 <Route path="/rest-dashboard">
-                    <div className="profile">
+                    <div class="profile">
                         <RestProfile />
                         <Route path="/rest-dashboard/about" exact>
-                            <div className="about">
+                            <div class="about">
                                 <About />
                             </div>
                         </Route>
                         <Route path="/rest-dashboard/dishes" exact>
-                            <div className="dish">
+                            <div class="dish">
                                 <ViewOrder />{' '}
                             </div>
                         </Route>

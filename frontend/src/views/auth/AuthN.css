@@ -4,9 +4,11 @@
     grid-template-columns: 1fr 75% 1fr;
     grid-template-rows: auto max-content auto;
     font-family: Roboto;
+}
     .login-wrapper {
         grid-column: 2;
         grid-row: 2;
+    }
         .logo {
             content: url('../../../src/assets/Uber_Eats.svg');
         }
@@ -24,8 +26,6 @@
             width: 70%;
             margin-bottom: 24px;
             height: 48px;
-
-            //rgb(224, 224, 224);
         }
         button {
             color: white;
@@ -36,5 +36,4 @@
         .alert {
             width: 70%;
         }
-    }
-}
+    

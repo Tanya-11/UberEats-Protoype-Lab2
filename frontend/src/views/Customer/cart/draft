@@ -32,7 +32,7 @@ class CartModal extends React.Component {
                         <div>
                             {
                                 orders.length > 0 && (
-                                    <div className="cart-wrapper">
+                                    <div class="cart-wrapper">
                                         <table>
 
                                             <thead>
@@ -58,9 +58,9 @@ class CartModal extends React.Component {
                             }
                             {
                                 orders.length === 0 &&
-                                <div className="cart-wrapper">
-                                    {/* <span className="close">X</span> */}
-                                    <span className="text">No Items in Cart
+                                <div class="cart-wrapper">
+                                    {/* <span class="close">X</span> */}
+                                    <span class="text">No Items in Cart
                                     </span>
                                 </div>
                             }

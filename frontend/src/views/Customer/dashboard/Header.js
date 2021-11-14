@@ -2,7 +2,7 @@ import Axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import './Header.scss'
+import './Header.css'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
 import Modal from '../../common/Modal/Modal'
 import CartModal from '../cart/CartModal'
@@ -37,18 +37,18 @@ const Header = () => {
     }
 
     return (
-        <div className="header-container">
-            <div className="uber-logo" onClick={navigateToDashboard}></div>
-            <div className="cart">
+        <div class="header-container">
+            <div class="uber-logo" onClick={navigateToDashboard}></div>
+            <div class="cart">
                 <button onClick={goToOrder}>
-                    <ShoppingCartOutlinedIcon className="cartIcon" />
+                    <ShoppingCartOutlinedIcon class="cartIcon" />
                     <input type="text" disabled value={cartLen}></input>
                 </button>
             </div>
             {showCartPopUp && <CartModal data={showCartPopUp} modal={goToOrder}></CartModal>}
-            <div className="user-logo" onClick={showPopUp} />
+            <div class="user-logo" onClick={showPopUp} />
             {isPopUp && (
-                <div className="modal-wrapper">
+                <div class="modal-wrapper">
                     <Modal />
                 </div>
             )}

@@ -1,0 +1,47 @@
+.CustomerProfile {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    height: 100%;
+}
+.CustomerProfile > .leftContent {
+    grid-column: 1;
+    border-radius: 0px;
+    background: #6c962c;
+    box-shadow: 18px 18px 36px #46621d, -18px -18px 36px #92cb3b;
+}
+.CustomerProfile > .leftContent > ul {
+    margin: 0;
+    padding: 0;
+}
+.CustomerProfile > .leftContent > ul > .uber-logo {
+    content: url('../../../assets/Uber_Eats.svg');
+    object-fit: scale-down;
+}
+.CustomerProfile > .leftContent > ul > li {
+    list-style-type: none;
+    margin: 10%;
+    cursor: pointer;
+    font-weight: 800;
+}
+
+.rightContent {
+    grid-column: 2;
+    margin-left: 3%;
+}
+.rightContent > label {
+    display: flex;
+    margin: 2%;
+
+    align-items: center;
+}
+.rightContent > label > input {
+    margin-left: 3%;
+}
+.rightContent > label > button {
+    border: 0;
+    margin-left: 5%;
+    border-radius: 32px;
+    height: 40px;
+    background: #4d962c;
+    cursor: pointer;
+}

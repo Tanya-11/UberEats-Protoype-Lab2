@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import Axios from 'axios'
-import './DishCards.scss'
+import './DishCards.css'
 import { Button } from 'react-bootstrap'
 
 const DishCard = (props) => {
@@ -55,7 +55,7 @@ const DishCard = (props) => {
 
     const submitDishData = () => {
         console.log(dishData)
-        Axios.post('http://18.191.91.254:3001/api/newdish', {
+        Axios.post('http://3.129.16.0:3001/api/newdish', {
             ...dishData,
         })
             .then((res) => {
@@ -68,7 +68,7 @@ const DishCard = (props) => {
     }
     return (
         <div>
-            <div className="dish-card-wrapper">
+            <div class="dish-card-wrapper">
                 <label>
                     Name:
                     <input
@@ -115,7 +115,7 @@ const DishCard = (props) => {
                     size="sm"
                     variant="secondary"
                     type="submit"
-                    className="submit"
+                    class="submit"
                     disabled={!changed}
                     onClick={submitDishData}
                 >

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import styles from './Cart.module.scss'
+import './Cart.css'
 import { useDispatch, useSelector } from 'react-redux'
 import Axios from 'axios'
 import { useHistory } from 'react-router'
@@ -114,7 +114,7 @@ const Cart = () => {
             console.log(orders.length);
         console.log(cart.length);
         console.log(orders);
-        Axios.post('http://18.191.91.254:3001/api/cart/placed',{
+        Axios.post('http://3.129.16.0:3001/api/cart/placed',{
             orders:orders,
             user:{
                 user_id:customer.user_id,
@@ -146,13 +146,13 @@ const Cart = () => {
     }
 
     return (
-        <div className={styles.Cart} data-testid="Cart">
+        <div class="Cart" data-testid="Cart">
             {!orderPlaced && cart.length > 0 && (
                 <div>
-                    <div className={styles.restName}>{restName}</div>
-                    <Table class={styles.cart}>
+                    <div class="restName">{restName}</div>
+                    <Table class="cart">
                         <thead>
-                            <tr class={styles.cartRow}>
+                            <tr class="cartRow">
                                 <th>Quantity</th>
                                 <th>Name</th>
                                 <th>Price</th>
@@ -160,20 +160,20 @@ const Cart = () => {
                         </thead>
                         <tbody>
                             {cart.map((order, index) => (
-                                <tr key={index} class={styles.cartRow}>
+                                <tr key={index} class="cartRow">
                                     <td>{order.text}</td>
                                     <td>{order.dishName}</td>
                                     <td>${order.text * +order.price}</td>
                                 </tr>
                             ))}
-                            <tr style={styles.total}>
+                            <tr style="total">
                                 <td>Total</td>
                                 <td />
                                 <td>${total}</td>
                             </tr>
                         </tbody>
                     </Table>
-                    <div className={styles.addr}>
+                    <div class="addr">
                         <span>
                             Instructions:
                             <input

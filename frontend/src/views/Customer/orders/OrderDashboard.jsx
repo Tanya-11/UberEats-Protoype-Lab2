@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import styles from './Orders.scss'
+import './Orders.css'
 import Axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import Orders from './CancelledOrders'
@@ -20,7 +20,7 @@ const OrderDetails = () => {
     
     return (
         <div>
-            <Nav defaultActiveKey="/dashboard/order-details/past-orders" className="flex-column">
+            <Nav defaultActiveKey="/dashboard/order-details/past-orders" class="flex-column">
                 <Nav.Link href="/dashboard/order-details/past-orders">Past Orders</Nav.Link>
                 <Nav.Link href="/dashboard/order-details/cancelled-orders">
                     Cancelled Orders

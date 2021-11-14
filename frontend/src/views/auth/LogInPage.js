@@ -11,7 +11,7 @@ import {
     role,
 } from '../../redux/actions/actions'
 import Axios from 'axios'
-import './AuthN.scss'
+import './AuthN.css'
 import { Alert } from 'react-bootstrap'
 
 export const LoginPage = (props) => {
@@ -117,7 +117,7 @@ export const LoginPage = (props) => {
 
     const onNextClicked = (e) => {
         e.preventDefault()
-        Axios.post('http://18.191.91.254:3001/api/login', {
+        Axios.post('http://3.129.16.0:3001/api/login', {
             username: emailValue,
             password: passwordValue,
             persona: props.data,
@@ -141,16 +141,16 @@ export const LoginPage = (props) => {
             })
     }
     return (
-        <div className="login-container">
-            <div className="login-wrapper">
-                <div className="logo" onClick={goToPersons} />
+        <div class="login-container">
+            <div class="login-wrapper">
+                <div class="logo" onClick={goToPersons} />
                 <h1>Welcome Back</h1>
                 {errorMsg && (
-                    <Alert variant="danger" className="fail">
+                    <Alert variant="danger" class="fail">
                         {errorMsg}
                     </Alert>
                 )}
-                <div className="login-form">
+                <div class="login-form">
                     <input
                         value={emailValue}
                         onChange={(e) => setEmailValue(e.target.value)}
