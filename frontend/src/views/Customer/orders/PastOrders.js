@@ -27,7 +27,7 @@ const PastOrders = () => {
     }, [pageSize, pageNo])
 
     const loadOrders = async (pageSize, pageNo) => {
-        const response = await Axios.post('http://3.141.193.70:3001/api/past-orders', {
+        const response = await Axios.post('http://18.191.91.254:3001/api/past-orders', {
             user: customer,
             size: pageSize,
             pageNo: pageNo,

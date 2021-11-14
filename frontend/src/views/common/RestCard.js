@@ -33,7 +33,7 @@ const RestCard = (props) => {
        console.log(`${api}${isFav}`)
         let response = []
         try {
-            response = await Axios.post('http://3.141.193.70:3001/api/fav-add'
+            response = await Axios.post('http://18.191.91.254:3001/api/fav-add'
             , {
                 user: customer,
                 restaurant: props.data.username,
@@ -59,7 +59,7 @@ const RestCard = (props) => {
     return (
         <div className="rest-card-container" onClick={goToRestCardDetails}>
             <div className="image-container">
-                {image && <img src={`http://3.141.193.70:3001/api/images/${image}`} />}
+                {image && <img src={`http://18.191.91.254:3001/api/images/${image}`} />}
             </div>
             <div className="rest-name-container">
                 <h3 className="rest-name-container--title"> {props.data.name}</h3>

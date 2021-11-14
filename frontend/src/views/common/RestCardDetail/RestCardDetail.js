@@ -35,7 +35,7 @@ const RestCardDetail = () => {
     return (
         <div className={styles.RestCardDetail} data-testid="RestCardDetail">
             <div className={styles.RestImg}>
-                {image && <img src={`http://3.141.193.70:3001/api/images/${image}`} />}
+                {image && <img src={`http://18.191.91.254:3001/api/images/${image}`} />}
             </div>
             <div className={styles.RestdescWrapper}>
                 <div className={styles.Restdesc}>

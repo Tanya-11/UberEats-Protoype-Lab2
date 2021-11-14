@@ -49,7 +49,7 @@ const About = () => {
     }
     const getRestData = () => {
         console.log(restaurant)
-        Axios.get(`http://3.141.193.70:3001/api/profile/${restaurant}`)
+        Axios.get(`http://18.191.91.254:3001/api/profile/${restaurant}`)
             .then((res) => {
                 console.log(res)
                 console.log(res.data)
@@ -144,10 +144,10 @@ const About = () => {
                 'content-type': 'multipart/form-data',
             },
         }
-        const setProfile = Axios.post('http://3.141.193.70:3001/api/profile', {
+        const setProfile = Axios.post('http://18.191.91.254:3001/api/profile', {
             restData,
         })
-        const setPhoto = Axios.post('http://3.141.193.70:3001/api/upload/photo', formData, config)
+        const setPhoto = Axios.post('http://18.191.91.254:3001/api/upload/photo', formData, config)
         Promise.all([setProfile, setPhoto])
             .then((res) => {
                 console.log(JSON.parse(res[0].config.data))
@@ -177,7 +177,7 @@ const About = () => {
                         margin: '12%',
                         float: 'right',
                     }}
-                    src={`http://3.141.193.70:3001/api/images/${image}`}
+                    src={`http://18.191.91.254:3001/api/images/${image}`}
                 />
             )}
             <label className="label">

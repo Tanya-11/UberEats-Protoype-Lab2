@@ -14,7 +14,7 @@ const Modal = () => {
 
 
     const logOut = () => {
-        Axios.post('http://3.141.193.70:3001/api/logout',{
+        Axios.post('http://18.191.91.254:3001/api/logout',{
             user:customer.user_id
         })
         .then(res=>{

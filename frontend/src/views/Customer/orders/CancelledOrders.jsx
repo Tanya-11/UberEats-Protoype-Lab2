@@ -28,7 +28,7 @@ const CustomerCancelledOrders = () => {
     }, [pageSize, pageNo])
 
     const loadOrders = (pageSize,pageNo) => {
-        Axios.post('http://3.141.193.70:3001/api/cancelled-orders', {
+        Axios.post('http://18.191.91.254:3001/api/cancelled-orders', {
             user: customer,
             size: pageSize,
             pageNo:pageNo
