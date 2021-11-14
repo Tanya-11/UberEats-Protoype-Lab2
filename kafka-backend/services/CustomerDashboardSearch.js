@@ -3,7 +3,8 @@ const {Users} = require('../models/users')
 const {Dishes,Order} =  require('../models/orders')
 const orders = require("../models/orders")
 async function handle_request(msg, callback) {
-    console.log('in search');
+  console.log('in');
+    console.log(msg);
 
     Users.find(
         {
@@ -29,18 +30,19 @@ async function handle_request(msg, callback) {
               city: { $regex: msg.city, $options: "i" },
               //    {"$in":[/San/]}
             },
+            {
+            $or: [
             { delivery: { $eq:msg.delivery } },
             { pickedUp: { $eq: msg.pickUp } },
+            ]
+          },
             { role: "restaurant" },
-    
-            // {'deliveryMode.topics.modules.classes.name':{"$in":[/math/]}}
-          ],
+              ],
         }
       )
         .then(
           (result) => {
-            // console.log("######################");
-            // console.log(result);
+
             callback(null, {'statusCode' :200, 'data':result })
         },
           (err) => {

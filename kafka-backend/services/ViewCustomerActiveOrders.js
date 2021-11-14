@@ -4,7 +4,7 @@ const {Dishes,Order} =  require('../models/orders')
 const orders = require("../models/orders")
 async function handle_request(msg, callback) {
     console.log('user'+msg);
-    Order.findOne(
+    Order.find(
         {
             $and: [   
             {'customer.username':msg.user},
@@ -16,21 +16,23 @@ async function handle_request(msg, callback) {
                 ]
             }
             ]
-        } 
-        ).then(
+        } )
+        .limit(msg.size)
+        .skip(msg.size * (msg.pageNo - 1))
+        .then(
         resp=>{
            console.log(resp);
            if(resp!==null){
             callback(null, {'statusCode' :200, 'data':resp })
         }
         else {
-            callback(null,{'statusCode' :400 } )
+            callback({'statusCode' :400 }, null)
         }
 
         },
         err=>{
             console.log(err);
-            callback(null, {'statusCode' :500, 'err':err })
+            callback({'statusCode' :500, 'err':err },null)
         }
     )
 }

@@ -29,6 +29,7 @@ async function handle_request(msg, callback) {
     //  address: 
     //  quantity: msg.quantity,
       price:msg.price,
+      instructions: msg.instructions
 
    }));
    order.save().then(

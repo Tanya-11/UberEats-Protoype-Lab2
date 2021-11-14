@@ -4,14 +4,17 @@ const {Dishes,Order} =  require('../models/orders')
 const orders = require("../models/orders")
 async function handle_request(msg, callback) {
     console.log(msg);
-    Order.findOne(
+    Order.find(
         {
             $and: [   
             {'customer.username':msg.user},
             {'orderStatus':{ $eq: 'Cancelled'}},
             ]
-        } 
-        ).then(
+        }
+        )
+        .limit(msg.size)
+        .skip(msg.size * (msg.pageNo - 1))
+        .then(
         resp=>{
             console.log(resp);
            if(resp!==null){
@@ -23,7 +26,7 @@ async function handle_request(msg, callback) {
 
         },
         err=>{
-            callback(err, {'statusCode' :500})
+            callback({'statusCode' :500},null )
         }
     )
 }

@@ -30,8 +30,9 @@ router.get('/profile/:username',(req,res)=>{
 })
 
 router.post('/profile',(req,res)=>{
+  console.log("Inside rest");
     console.log(req.body.restData);
-    kafka.make_request("setRestProfile", req.params.username, function (err, results) {
+    kafka.make_request("updateRestProfile", req.body.restData, function (err, results) {
         console.log("Inside signUp");
         console.log(err);
         console.log(results);

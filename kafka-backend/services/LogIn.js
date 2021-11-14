@@ -9,6 +9,7 @@ const {
 } = require("../../backend/auth");
 
 async function handle_request(msg, callback) {
+  console.log('in login');
   const refreshToken = getRefreshToken({ _id: msg._id });
   Users.findById(msg._id).then(
     (user) => {
@@ -24,20 +25,19 @@ async function handle_request(msg, callback) {
           // res.send(err)
           callback(null, { statusCode: 500, err: err });
         } else {
-          // res.cookie("refreshToken", refreshToken, COOKIE_OPTIONS)
-          // res.send({ success: true, token })
+
           callback(null, {
             statusCode: 200,
-             'refreshToken':refreshToken,
-          'address':resp?.addressLine1||'',
-           'user':user._id 
+            'refreshToken': refreshToken,
+            'address': resp?.addressLine1 || '',
+            'user': user._id
           });
         }
       });
     },
     (err) => {
       console.log("err1" + err);
-      callback(null, { statusCode: 500, err: err });
+      callback({ statusCode: 500, err: err },null );
       // next(err)
       // res.send({ success: false })
     }

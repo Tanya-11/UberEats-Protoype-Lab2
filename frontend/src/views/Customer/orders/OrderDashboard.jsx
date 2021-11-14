@@ -17,30 +17,7 @@ const OrderDetails = () => {
     const [errorMsg, setErrorMsg] = useState('')
     Axios.defaults.withCredentials = true
     const [index, setIndex] = useState(0)
-    useEffect(() => {
-        loadOrders()
-    }, [])
-
-    const loadOrders = (val = 1) => {
-        console.log('bye' + val)
-        Axios.post('http://localhost:3001/api/cancelled-orders', {
-            user: customer,
-            page: val,
-        })
-            .then((res) => {
-                console.log(res.data)
-                let active = []
-                let past = []
-                let cancel = []
-                let response = res.data
-                setPastOrders(response)
-                // setActiveOrders(active)
-                // setCancelledOrders(cancel)
-            })
-            .catch((err) => {
-                setErrorMsg('No Data')
-            })
-    }
+    
     return (
         <div>
             <Nav defaultActiveKey="/dashboard/order-details/past-orders" className="flex-column">

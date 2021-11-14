@@ -12,25 +12,14 @@ const Dashboard = () => {
     const [location, setLocation] = useState('')
     const [searchString, setSearchString] = useState('')
     const [searchData, setSearchData] = useState({
-        city:JSON.parse(localStorage.getItem('address')).city,
+        city:'',
         delivery: false,
         pickUp:false,
         category: '',
         searchTabText: '',
     })
-    const [value, setValue] = useState([1, 3])
     Axios.defaults.withCredentials = true
-    const [ name, setName]= useState('');
-//     const getRestData = Axios.get('/me'
-//    // , {
-//        // ...searchData,
-//    // }
-//     )
 
-    // const getFavData = Axios.post('/get-favorites', {
-    //     email: customer,
-    // })
-    // + adding the use
 
     const getRestData = Axios.post('http://localhost:3001/api/search', {
         searchData:searchData
@@ -42,8 +31,6 @@ const Dashboard = () => {
     useEffect(() => {
         Promise.all([getRestData, getFavData])
             .then((res) => {
-                console.log("resul############");
-                console.log(res)
                 res[0].data.map((el) => {
                     res[1].data.data.map((item) => {
                         if (el.username === item.restaurant) {
@@ -58,7 +45,6 @@ const Dashboard = () => {
                 throw err
             })
     },[searchData]
-    // [searchData]
     )
 
     const handleChange = (e) => {
@@ -70,7 +56,7 @@ const Dashboard = () => {
         }))
         // console  .log(searchData)
     }
-    // const handleChangebtn = (val) => setValue(val)
+
     return (
         <div className="dashboardContent">
             <div className="leftContent">

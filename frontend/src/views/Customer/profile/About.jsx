@@ -4,11 +4,14 @@ import Axios from 'axios'
 import { useHistory } from 'react-router'
 import { useSelector } from 'react-redux'
 import './CustomerProfile.scss'
+import NativeSelect from '@mui/material/NativeSelect'
+
 export const About = (props) => {
     const [changed, setChanged] = useState(false)
     const history = useHistory()
     const customer = useSelector((state) => state.userLogin.user)
     Axios.defaults.withCredentials = true
+    const [countriesData, setCountryData] = useState([])
     const [userData, setUserData] = useState({
         name: '',
         username: '',
@@ -23,9 +26,17 @@ export const About = (props) => {
     useEffect(() => {
         setUserData(props.data)
         setImage(props.data.image)
-        console.log(props.data);
+        fetchCountryData()
     }, [props.data])
 
+    const fetchCountryData = async () => {
+        const countries = await Axios.get('https://restcountries.com/v3.1/all')
+        console.log(countries)
+        countries.data.forEach((el) => {
+            console.log(el)
+            setCountryData((prev) => [...prev, el.name.common])
+        })
+    }
     const submitCustomerData = () => {
         console.log('hI')
         const formData = new FormData()
@@ -41,10 +52,10 @@ export const About = (props) => {
             userId: customer,
         })
         const setPhoto = Axios.post('http://localhost:3001/api/upload/photo', formData, config)
-        Promise.all([setProfile,setPhoto])
+        Promise.all([setProfile, setPhoto])
 
             .then((res) => {
-              //  console.log(userData);
+                //  console.log(userData);
                 console.log(res)
                 setImage(res[1].data.imageURL)
             })
@@ -53,7 +64,6 @@ export const About = (props) => {
             })
     }
     const handleChange = (e) => {
-        console.log(e.target.name)
         const { name, value } = e.target
         // const
         setChanged(true)
@@ -80,9 +90,9 @@ export const About = (props) => {
         //  const result = await Axios.post('http://localhost:3001/upload-pic', formData, config)
         //  setImage(result.data.imagePath)
         //  setImage('image/3fe4ee4f70dfcfc6cf0fc7acb09ea0f5')
-     //   const result = await Axios.get('http://localhost:3001/fetch-file')
-     //   console.log(result.data[0])
-      //  setImage(result.data[1].image)
+        //   const result = await Axios.get('http://localhost:3001/fetch-file')
+        //   console.log(result.data[0])
+        //  setImage(result.data[1].image)
         // console.log(res);
         // setImage(res.data)
         // console.log(formData);
@@ -112,9 +122,6 @@ export const About = (props) => {
                     value={userData.name}
                 ></input>
             </label>
-            {/* 
-      <span>DOB</span>
-      <input type="text" onChange={setDOB} value={dob}></input> */}
 
             <label>
                 Email
@@ -168,13 +175,21 @@ export const About = (props) => {
                 ></input>
             </label>
             <label>
-                Country
-                <input
+                Country :
+                <NativeSelect
+                    inputProps={{
+                        name: 'country',
+                        id: 'uncontrolled-native',
+                    }}
                     name="country"
-                    onChange={(e) => handleChange(e)}
-                    disabled={props.disabled}
-                    value={userData.country}
-                ></input>
+                    onChange={(e)=>handleChange(e)}
+                >   
+                 <option value={userData.country}>{userData.country}</option>
+                        {countriesData.map((el, index) => (
+                     <option value={el}>{el}</option>
+                    ))}
+
+                </NativeSelect>
             </label>
             <input
                 type="file"

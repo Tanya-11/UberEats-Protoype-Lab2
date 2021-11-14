@@ -18,7 +18,7 @@ const RestCard = (props) => {
     useEffect(() => {
         console.log('restcard', props)
         setisFav(props.data.isFav)
-        setImage(props.data.image)
+        setImage(props.data.imageURL)
     }, [props.data])
 
     const setfavData = async (e) => {
@@ -33,7 +33,7 @@ const RestCard = (props) => {
        console.log(`${api}${isFav}`)
         let response = []
         try {
-            response = await Axios.post('http://localhost:3001/api/favs'
+            response = await Axios.post('http://localhost:3001/api/fav-add'
             , {
                 user: customer,
                 restaurant: props.data.username,

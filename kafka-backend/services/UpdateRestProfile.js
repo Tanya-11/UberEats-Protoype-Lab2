@@ -3,7 +3,6 @@ const {Users} = require('../models/users')
 const {Dishes,Order} =  require('../models/orders')
 const orders = require("../models/orders")
 async function handle_request(msg, callback) {
-
     Users.updateOne({"username":msg.username},
     {
         ...msg

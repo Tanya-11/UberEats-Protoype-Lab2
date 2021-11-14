@@ -6,13 +6,11 @@
         height: 5.5rem;
         max-height: 20%;
         width: 100%;
-        // background-color: aqua;
-        object-fit: fill;
-        // content: url(../../../assets/restaurant.png);
-        // border: solid black;
+
         img {
             width: inherit;
             height: inherit;
+            object-fit: cover;
         }
     }
     .RestdescWrapper {

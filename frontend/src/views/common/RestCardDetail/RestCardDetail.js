@@ -11,7 +11,7 @@ const RestCardDetail = () => {
         if (localStorage.getItem('RestCardDetails')) {
           //  getRestDishDetails(JSON.parse(localStorage.getItem('RestCardDetails')).restId)
             setDish(JSON.parse(localStorage.getItem('RestCardDetails')));
-            setImage(JSON.parse(localStorage.getItem('RestCardDetails')).image)
+            setImage(JSON.parse(localStorage.getItem('RestCardDetails')).imageURL)
         }
     }, [])
 

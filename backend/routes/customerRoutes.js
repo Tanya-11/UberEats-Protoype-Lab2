@@ -49,8 +49,10 @@ const {
 } = require("../auth");
 const { response } = require("express");
 
-router.post("/search", verifyUser, (req, res) => {
-  console.log(req.body.searchData);
+router.post("/search",
+ verifyUser,
+  (req, res) => {
+ 
   let {
     city = "",
     category = "",
@@ -58,6 +60,7 @@ router.post("/search", verifyUser, (req, res) => {
     delivery = true,
     pickUp = false,
   } = req.body.searchData;
+  console.log(req.body.searchData);
   kafka.make_request(
     "fetchSearchResults",
     { city, category, searchTabText, delivery, pickUp },
@@ -100,10 +103,6 @@ router.post("/favs", (req, res) => {
   });
 });
 
-router.get("/me", (req, res, next) => {
-  // console.log('verify');
-  // res.send(req.user)
-});
 router.post("/customer/profile", async (req, res) => {
   kafka.make_request("customerProfile", req.body, function (err, results) {
     if (err) {
@@ -145,6 +144,8 @@ router.post("/cart/placed", (req, res) => {
   });
 });
 router.post("/cancelled-orders", (req, res) => {
+  console.log( req.body);
+
   kafka.make_request(
     "getCutomerOrdersCancelled",
     req.body,
@@ -163,6 +164,7 @@ router.post("/cancelled-orders", (req, res) => {
 });
 
 router.post("/past-orders", (req, res) => {
+
   kafka.make_request("getCutomerOrdersPast", req.body, function (err, results) {
     if (err) {
       res.status(500).end();
@@ -177,11 +179,13 @@ router.post("/past-orders", (req, res) => {
 });
 
 router.post("/active-orders", (req, res) => {
+
   kafka.make_request(
     "getCutomerOrdersActive",
     req.body,
     function (err, results) {
       if (err) {
+        console.log(err);
         res.status(500).end();
       } else {
         if (results?.statusCode == 200) {
@@ -230,9 +234,7 @@ router.post("/upload/photo", upload.single("image"), async (req, res) => {
 });
 
 router.get("/images/:key", (req, res) => {
-  console.log(
-    "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-  );
+
   console.log(req.params);
   const key = req.params.key;
   const readStream = getFileStream(key);

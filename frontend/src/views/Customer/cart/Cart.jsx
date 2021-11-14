@@ -16,7 +16,7 @@ const Cart = () => {
     const history = useHistory()
     const [total, setTotal] = useState(0)
     const [restName, setRestName] = useState('')
-    const [addr1, setAddr1] = useState('')
+    const [instructions, setInstructions] = useState('')
     const [addr2, setAddr2] = useState('')
     const [mode, setMode] = useState('')
     const [orders, setOrders] = useState([]);
@@ -42,7 +42,7 @@ const Cart = () => {
     //     })
     //         .then((res) => {
     //             console.log(res.data[0])
-    //             setAddr1(res.data[0].address1)
+    //             setInstructions(res.data[0].address1)
     //             setAddr2(res.data[0].address2)
     //         })
     //         .catch((err) => {
@@ -52,7 +52,7 @@ const Cart = () => {
     const setAddr = () => {
         console.log('ss' + addr2)
         Axios.post('/set-address', {
-            address1: addr1,
+            address1: instructions,
             address2: addr2,
             custId: customer,
         })
@@ -82,7 +82,7 @@ const Cart = () => {
         //             quantity: cart[i].text,
         //             price: parseInt(cart[i].text) * parseInt(cart[i].price),
         //             date: moment(new Date()).format('YYYY-MM-DD HH:mm'),
-        //             address: addr1,
+        //             address: instructions,
         //         })
         //     )
         // }
@@ -122,9 +122,10 @@ const Cart = () => {
             },
             orderStatus: 'Placed',
             date: moment(new Date()).format('YYYY-MM-DD HH:mm'),
-            address: addr1,
+            address: instructions,
             restId: cart[0].restId,
-            price:total
+            price:total,
+            instructions: instructions
 
         })
         .then(
@@ -174,12 +175,12 @@ const Cart = () => {
                     </Table>
                     <div className={styles.addr}>
                         <span>
-                            Address:
+                            Instructions:
                             <input
                                 type="text"
-                                value={addr1}
+                                value={instructions}
                                 onChange={(e) => {
-                                    setAddr1(e.target.value)
+                                    setInstructions(e.target.value)
                                 }}
                             />
                         </span>
@@ -208,11 +209,11 @@ const Cart = () => {
                             {mode !== 'both' && <span>{mode}</span>}
                         </span> */}
 
-                        <div style={{ margin: '3%' }}>
+                        {/* <div style={{ margin: '3%' }}>
                             <Button type="submit" onClick={setAddr}>
                                 Save Address
                             </Button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             )}

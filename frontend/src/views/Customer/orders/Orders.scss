@@ -24,6 +24,14 @@
     .right-content {
         grid-column: 2;
         margin-left: 3%;
+        .wrapper{
+            width: 60vw;
+
+            .container-fluid{
+                float: left;
+                width: 87%;
+            }
+        }
         .order-box {
             border-radius: 5px;
             background: #aaf3d0;

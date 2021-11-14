@@ -48,9 +48,9 @@ const PrivateRoute = (restOfProps) => {
             })
     }, [])
 
-    useEffect(() => {
-        verifyUser()
-    }, [verifyUser])
+    // useEffect(() => {
+    //     verifyUser()
+    // }, [verifyUser])
     console.log('this', isAuth)
     return isAuth ? <Route {...restOfProps}></Route> : <Redirect to="/" />
 }

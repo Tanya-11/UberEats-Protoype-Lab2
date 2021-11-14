@@ -4,10 +4,12 @@ import { Col, Container, Row, Badge, Alert, Button } from 'react-bootstrap'
 import * as moment from 'moment'
 import ReceiptModal from './ReceiptModal'
 import Axios from 'axios'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
+import Pagination from '@mui/material/Pagination'
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 const CustomerActiveOrders = () => {
-    const [orders, setOrders] = useState([])
     const [showHide, setShowHide] = useState(false)
     const [receipt, setReceipt] = useState([])
     const [total, setTotal] = useState(0)
@@ -15,29 +17,32 @@ const CustomerActiveOrders = () => {
     const [show, setShow] = useState(false)
     const [activeOrders, setActiveOrders] = useState([])
     const customer = useSelector((state) => state.userLogin.user)
-
+    const [pageSize, setPageSize] = React.useState(5)
+    const [pageNo, setPageNo] = React.useState(1)
+    const [errorMsg, setErrorMsg] = useState('')
     useEffect(() => {
-        loadOrders()
-    }, [])
+        loadOrders(pageSize, pageNo)
+    }, [pageSize, pageNo])
 
-    const loadOrders = (val = 1) => {
-        console.log('bye' + val)
+    const loadOrders = (pageSize, pageNo) => {
         Axios.post('http://localhost:3001/api/active-orders', {
             user: customer,
-            page: val,
+            size: pageSize,
+            pageNo: pageNo,
         })
             .then((res) => {
                 console.log(res.data)
-                let active = []
-                let past = []
-                let cancel = []
                 let response = res.data
-                setActiveOrders(response)
-                // setActiveOrders(active)
-                // setCancelledOrders(cancel)
+             
+                console.log(response.length);
+                if (response.length === 0) {
+                    setErrorMsg('No data')
+                    setActiveOrders([])
+                } 
+                else    setActiveOrders(response)
             })
             .catch((err) => {
-                //  setErrorMsg('No Data')
+                setErrorMsg('No Data')
             })
     }
 
@@ -48,6 +53,12 @@ const CustomerActiveOrders = () => {
         setTotal(total)
         console.log(showHide)
     }
+    const handleChangeForSize = (event) => {
+        setPageSize(event.target.value);
+      };
+      const handleChangeForPageNo = (event, value)=> {
+        setPageNo(value);
+      };
 
     const cancelOrder = (item) => {
         console.log(item)
@@ -77,53 +88,39 @@ const CustomerActiveOrders = () => {
             })
     }
 
-    // const loadOrders = (event) => {
-    //     //  console.log(this.props);
-    //     console.log('Hi' + parseInt(event.target.innerText))
-    //     props.load(parseInt(event.target.innerText))
-    // }
-
-    // const cancelOrder = (item) => {
-    //     console.log(item)
-    //     Axios.post('http://localhost:3001/api/orders/update/status', {
-    //         orderId: item._id,
-    //         orderStatus: 'Cancelled',
-    //         date: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
-    //     })
-    //         .then(
-    //             (res) => {
-    //                 console.log(res)
-    //                 if(res.status=200){
-    //                     setSuccessMsg('Cancelled Order')
-    //                   setShow(true);
-    //                   setTimeout(() => {
-    //                     setShow(false);
-    //                     window.location.reload();
-    //                  }, 1000);
-
-    //                 }
-    //             },
-    //             (err) => {
-    //                 console.log(err)
-    //             }
-    //         )
-    //         .catch((err) => {
-    //             console.log(err)
-    //         })
-    // }
-    //   render() {
     return (
-        <div>
+        <div class="wrapper">
             <Alert show={show} variant="success">
                 <Alert.Heading>{sucessMsg}</Alert.Heading>
             </Alert>
+
+            <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={pageSize}
+                label="Page"
+                onChange={handleChangeForSize}
+            >
+                <MenuItem value={2}>2</MenuItem>
+                <MenuItem value={5}>5</MenuItem>
+                <MenuItem value={10}>10</MenuItem>
+            </Select>
             <Container fluid>
-                {activeOrders.length > 0 &&
+            {
+               activeOrders.length===0 &&  (
+                <Alert  variant="secondary">
+                <Alert.Heading>No Data on this page</Alert.Heading>
+            </Alert>
+               )
+            }
+                {
                     activeOrders.map((el, index) => (
                         <div className="order-box" key={index}>
                             <Row>
                                 <Col md={6} sm={3}>
-                                    <span><b>{el.restId}</b></span>
+                                    <span>
+                                        <b>{el.restId}</b>
+                                    </span>
                                     <div>
                                         Ordered for ${el.price} on {moment(el.date).format('LLL')}
                                         <input
@@ -133,15 +130,29 @@ const CustomerActiveOrders = () => {
                                         />
                                     </div>
                                 </Col>
-                                <Col md={3} sm={1} style={{    display: 'flex',alignSelf: 'center',
-    justifyContent: 'end'}}>
+                                <Col
+                                    md={3}
+                                    sm={1}
+                                    style={{
+                                        display: 'flex',
+                                        alignSelf: 'center',
+                                        justifyContent: 'end',
+                                    }}
+                                >
                                     <Badge pill bg="info" text="dark">
                                         {el.orderStatus}
                                     </Badge>
                                 </Col>
                                 {el.orderStatus === 'Placed' && (
-                                     <Col lg={2} md={2} sm={2} style={{    display: 'flex',alignSelf: 'center',
-                                     justifyContent: 'end'}}
+                                    <Col
+                                        lg={2}
+                                        md={2}
+                                        sm={2}
+                                        style={{
+                                            display: 'flex',
+                                            alignSelf: 'center',
+                                            justifyContent: 'end',
+                                        }}
                                         // disabled={el.orderStatus !== 'Placed'}
                                         onClick={() => cancelOrder(el)}
                                     >
@@ -159,6 +170,7 @@ const CustomerActiveOrders = () => {
                         total={total}
                     ></ReceiptModal>
                 )}
+                <Pagination count={5} shape="rounded" onChange={handleChangeForPageNo} />
             </Container>
         </div>
     )

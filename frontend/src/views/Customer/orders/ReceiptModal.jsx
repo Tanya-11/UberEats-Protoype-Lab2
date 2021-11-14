@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import Axios from 'axios'
 import * as moment from 'moment'
+import { ThumbUpSharp } from '@mui/icons-material'
 
 class ReceiptModal extends React.Component {
     constructor(props) {
@@ -10,6 +11,7 @@ class ReceiptModal extends React.Component {
             showHide: this.props.showHide,
             orders: this.props.data,
             total: this.props.total,
+            instructions : this.props.instructions
         }
         console.log(this.props);
     //    this.getReceipt = this.getReceipt.bind(this)
@@ -56,10 +58,16 @@ class ReceiptModal extends React.Component {
                             </tbody>
                             <tfoot>
                                 <tr>
+                                    <td>Instructions:</td>
+                                    <td />
+                                    <td>{this.state.instructions}</td>
+                                </tr>
+                                <tr>
                                     <td>Total:</td>
                                     <td />
                                     <td>{this.state.total}</td>
                                 </tr>
+
                             </tfoot>
                         </table>
                     </Modal.Body>

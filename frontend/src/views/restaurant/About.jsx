@@ -3,14 +3,15 @@ import { useSelector } from 'react-redux'
 import Axios from 'axios'
 import './Profile.scss'
 import { Button } from 'react-bootstrap'
+import NativeSelect from '@mui/material/NativeSelect'
 
 const About = () => {
     const restaurant = useSelector((state) => state.restLogin.user)
     const [startOpenHrs, setStartOpenHrs] = useState('00:00:00')
     const [endOpenHrs, setEndOpenHrs] = useState('00:00:00')
     const mode = {
-        delivery:false,
-        pickedUp:false
+        delivery: false,
+        pickedUp: false,
     }
     const [restData, setRestData] = useState({
         name: '',
@@ -22,12 +23,13 @@ const About = () => {
         country: '',
         description: '',
         openHrs: `${startOpenHrs} - ${endOpenHrs}`,
-        delivery:false,
-        pickedUp:false
+        delivery: false,
+        pickedUp: false,
     })
     const [file, setFile] = useState()
     const [image, setImage] = useState()
     const [changed, setChanged] = useState(false)
+    const [countriesData, setCountryData] = useState([])
     const [openHrsMsg, setOpenHrsMsg] = useState(
         'The format is "HH:mm", "HH:mm:ss" or "HH:mm:ss.SSS" where HH is 00-23, mm is 00-59, ss is 00-59, and SSS is 000-999'
     )
@@ -35,14 +37,22 @@ const About = () => {
 
     useEffect(() => {
         getRestData()
+        fetchCountryData()
     }, [])
+    const fetchCountryData = async () => {
+        const countries = await Axios.get('https://restcountries.com/v3.1/all')
+        console.log(countries)
+        countries.data.forEach((el) => {
+            console.log(el)
+            setCountryData((prev) => [...prev, el.name.common])
+        })
+    }
     const getRestData = () => {
-        console.log(restaurant);
-        Axios.get(`http://localhost:3001/api/profile/${restaurant}`
-        )
+        console.log(restaurant)
+        Axios.get(`http://localhost:3001/api/profile/${restaurant}`)
             .then((res) => {
                 console.log(res)
-               console.log(res.data)
+                console.log(res.data)
                 setRestData({
                     name: res.data.name,
                     username: restaurant,
@@ -53,10 +63,10 @@ const About = () => {
                     country: res.data.country,
                     description: res.data.description || '',
                     openHrs: res.data.openHrs,
-                    delivery:res.data?.delivery|| false,
-                    pickedUp:res.data?.pickedUp|| false
+                    delivery: res.data?.delivery || false,
+                    pickedUp: res.data?.pickedUp || false,
                 })
-                setImage(res.data.image)
+                setImage(res.data.imageURL)
                 setStartOpenHrs(res.data.openHrs.split(' - ')[0])
                 setEndOpenHrs(res.data.openHrs.split(' - ')[1])
 
@@ -79,26 +89,25 @@ const About = () => {
         setRestData((prevState) => ({
             ...prevState,
             [name]: value,
-            // deliveryMode.delivery: 
+            // deliveryMode.delivery:
             // deliveryMode.pickedUp:
-         //   deliveryMode:prevState.deliveryMode.includes('delivery') && prevState.deliveryMode.includes('pick')?value :prevState.deliveryMode.concat(value),
+            //   deliveryMode:prevState.deliveryMode.includes('delivery') && prevState.deliveryMode.includes('pick')?value :prevState.deliveryMode.concat(value),
             openHrs: `${startOpenHrs} - ${endOpenHrs}`,
         }))
 
         console.log(restData)
     }
 
-    const handleMode=(event)=>{
-        
+    const handleMode = (event) => {
         const { name, value } = event.target
-        console.log(value);
+        console.log(value)
         // console.log(restData.deliveryMode[name]);
         // var a =!restData.deliveryMode[name]
         // console.log(a);
-        let val=false;
-        if(restData[name]==true) val= false;
-        else val =true;
-        console.log(val);
+        let val = false
+        if (restData[name] == true) val = false
+        else val = true
+        console.log(val)
         setRestData((prevState) => ({
             ...prevState,
             [name]: val,
@@ -138,14 +147,12 @@ const About = () => {
         const setProfile = Axios.post('http://localhost:3001/api/profile', {
             restData,
         })
-      //  const setPhoto = Axios.post('http://localhost:3001/upload-pic', formData, config)
-        Promise.all([setProfile
-          //  , setPhoto
-        ])
+        const setPhoto = Axios.post('http://localhost:3001/api/upload/photo', formData, config)
+        Promise.all([setProfile, setPhoto])
             .then((res) => {
                 console.log(JSON.parse(res[0].config.data))
                 //  localStorage.setItem('deliveryMode', restData.deliveryMode)
-                setImage(res[1]?.data)
+                setImage(res[1]?.data.imageURL)
             })
             .catch((err) => {
                 throw err
@@ -161,6 +168,18 @@ const About = () => {
     }
     return (
         <div className="rightContent">
+            {image && (
+                <img
+                    style={{
+                        width: '100px',
+                        height: '100px',
+                        display: 'inline',
+                        margin: '12%',
+                        float: 'right',
+                    }}
+                    src={`http://localhost:3001/api/images/${image}`}
+                />
+            )}
             <label className="label">
                 Name:
                 <input
@@ -216,19 +235,20 @@ const About = () => {
             </label>
             <label className="label">
                 Country
-                <input
+                <NativeSelect
+                    inputProps={{
+                        name: 'country',
+                        id: 'uncontrolled-native',
+                    }}
                     name="country"
-                    onChange={(e) => handleChange(e)}
-                    value={restData.country}
-                ></input>
-            </label>
-            <label className="label">
-                Description
-                <input
-                    name="description"
-                    onChange={(e) => handleChange(e)}
-                    value={restData.description}
-                ></input>
+                    onChange={(e)=>handleChange(e)}
+                >   
+                 <option value={restData.country}>{restData.country}</option>
+                        {countriesData.map((el, index) => (
+                     <option value={el}>{el}</option>
+                    ))}
+
+                </NativeSelect>
             </label>
             <label className="label">
                 Opening Hrs
@@ -251,9 +271,10 @@ const About = () => {
                     value={endOpenHrs}
                 ></input>
             </label>
-            <div className="mode"
-           //  onChange={(e) => handleChange(e)}
-             >
+            <div
+                className="mode"
+                //  onChange={(e) => handleChange(e)}
+            >
                 <label className="label">
                     Mode:
                     <label style={{ width: '100px' }}>
@@ -261,7 +282,7 @@ const About = () => {
                             type="checkbox"
                             value={!restData?.delivery}
                             name="delivery"
-                            checked={restData?.delivery===true}
+                            checked={restData?.delivery === true}
                             onChange={(e) => handleMode(e)}
                         />
                         Delivery
@@ -271,7 +292,7 @@ const About = () => {
                             type="checkbox"
                             value={!restData?.pickedUp}
                             name="pickedUp"
-                            checked={restData?.pickedUp===true}
+                            checked={restData?.pickedUp === true}
                             onChange={(e) => handleMode(e)}
                         />
                         Pick Up
@@ -292,12 +313,6 @@ const About = () => {
                     onChange={(e) => setFile(e.target.files[0])}
                     accept="image/*"
                 />
-                {image && (
-                    <img
-                        style={{ width: '100px', height: '100px' }}
-                        src={`http://localhost:3001/${image}`}
-                    />
-                )}
             </div>
             {/* <label>Delivery Mode:
                 <input type="radio" name="deliveryMode"
