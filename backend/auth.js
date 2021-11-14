@@ -5,7 +5,7 @@ const dev = process.env.NODE_ENV !== "production"
 
 exports.COOKIE_OPTIONS = {
   httpOnly: true,
-  // Since localhost is not having https protocol,
+  // Since 18.224.59.255 is not having https protocol,
   // secure cookies do not work correctly (in postman)
   secure: !dev,
   signed: true,

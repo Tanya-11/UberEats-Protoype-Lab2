@@ -114,7 +114,7 @@ const Cart = () => {
             console.log(orders.length);
         console.log(cart.length);
         console.log(orders);
-        Axios.post('http://localhost:3001/api/cart/placed',{
+        Axios.post('http://18.224.59.255:3001/api/cart/placed',{
             orders:orders,
             user:{
                 user_id:customer.user_id,

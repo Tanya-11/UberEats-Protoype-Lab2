@@ -45,7 +45,7 @@ const SignUpPage = (props) => {
         }
     }, [])
     const onSignUpClicked = () => {
-        Axios.post('http://localhost:3001/api/signup', {
+        Axios.post('http://18.224.59.255:3001/api/signup', {
             name: nameValue,
             username: emailValue,
             password: passwordValue,
