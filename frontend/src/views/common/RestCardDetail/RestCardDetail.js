@@ -40,7 +40,7 @@ const RestCardDetail = () => {
             <div class="RestdescWrapper">
                 <div class="Restdesc">
                     <div class="name">
-                        {dish.name}({dish?.addressLine1})
+                        {dish.name}({dish?.addressLine1}), {dish.city}, {dish.country}
                     </div>
                     <div class="desc">{dish?.description}</div>
                     <div class="open-hrs">{dish?.openHrs}</div>
