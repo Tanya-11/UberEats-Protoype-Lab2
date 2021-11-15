@@ -119,7 +119,7 @@ const CustomerCancelledOrders = () => {
                                     }}
                                 >
                                     <Badge pill bg="info" text="dark">
-                                        {el.orderStatus}
+                                        Cancelled
                                     </Badge>
                                 </Col>
                             </Row>
