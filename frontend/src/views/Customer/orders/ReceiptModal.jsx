@@ -57,15 +57,15 @@ class ReceiptModal extends React.Component {
                                 ))}
                             </tbody>
                             <tfoot>
-                                <tr>
-                                    <td>Instructions:</td>
-                                    <td />
-                                    <td>{this.state.instructions}</td>
-                                </tr>
+                               
                                 <tr>
                                     <td>Total:</td>
                                     <td />
                                     <td>{this.state.total}</td>
+                                </tr>
+                                <tr>
+                                    <td style={{fontWeight:"bold"}}>Special Instructions:</td>
+                                    <td>{this.state.instructions}</td>
                                 </tr>
 
                             </tfoot>

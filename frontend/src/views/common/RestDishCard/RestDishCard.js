@@ -28,8 +28,8 @@ const RestDishCard = (props) => {
             console.log(orders)
             console.log(props.restName)
         } else {
-            console.log(props.restName)       
-                 console.log('modallll')
+            console.log(props.restName)
+            console.log('modallll')
             setShowModal(true)
             // setErrorMsg(`Your Order contains items from ${orders[0].restName}, Want to Create a new Order from ${props.data.restName}`)
         }
@@ -41,19 +41,20 @@ const RestDishCard = (props) => {
 
     return (
         <div class="RestDishCard">
-            {<span>{errorMsg}</span>}
+            { errorMsg && <span>{errorMsg}</span>}
             <div class="RestDishCardWrapper">
-                <div class="dishImage">
+                <div class="dish-image-container">
+                    <img className="dish-image"></img>
                     <div class="dishAddIcon" onClick={addToCart}>
                         <AddIcon />
                     </div>
                 </div>
                 <div class="dishDetail">
-                    <div>
-                        <em>{props.dishes.dishName}</em>
-                    </div>
-                    <div>{props.dishes.ingredients}</div>
-                    <div>${props.dishes.price}</div>
+                    <h4 class="dish-name">
+                        {props.dishes.dishName}
+                    </h4>
+                    <div class="dish-ingredients">{props.dishes.ingredients}</div>
+                    <div class="dish-price">${props.dishes.price}</div>
                 </div>
             </div>
             {showModal && (

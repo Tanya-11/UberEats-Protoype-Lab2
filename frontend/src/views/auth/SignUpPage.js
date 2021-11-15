@@ -78,13 +78,13 @@ const SignUpPage = (props) => {
                 if(props.data ==='customer')
                 dispatch(
                     userLogInFail({
-                        text: token,
+                        text: token ||null,
                         user: emailValue,
                     })
                 )
                 else   dispatch(
                     restLogInFail({
-                        text: token,
+                        text: token||null,
                         user: emailValue,
                     })
                 )
@@ -98,40 +98,40 @@ const SignUpPage = (props) => {
         <div class="login-container">
             <div class="login-wrapper">
                 <div class="logo" onClick={goToPersons} />
-                <h1>Let's get started</h1>
+                <h2>Let's get started</h2>
                 {errorMsg && (
                     <Alert variant="danger" class="fail">
                         {errorMsg}
                     </Alert>
                 )}
                 <div class="login-form">
-                    <input
+                    <input className ="login-input"
                         value={nameValue}
                         onChange={(e) => setNameValue(e.target.value)}
                         type="text"
                         placeholder={namePlaceholder}
                     />
-                    <input
+                    <input className ="login-input"
                         value={emailValue}
                         onChange={(e) => setEmailValue(e.target.value)}
                         type="email"
                         placeholder={emailPlaceholder}
                     />
-                    <input
+                    <input className ="login-input"
                         value={passwordValue}
                         onChange={(e) => setPasswordValue(e.target.value)}
                         type="password"
                         placeholder={passwordPlaceholder}
                     />
                     {props.data === 'restaurant' && (
-                        <input
+                        <input className ="login-input"
                             value={cityValue}
                             onChange={(e) => setcityValue(e.target.value)}
                             type="text"
                             placeholder={cityPlaceholder}
                         />
                     )}
-                    <button
+                    <button className ="login-btn"
                         // disabled={!emailValue || !passwordValue || !confirmPasswordValue }
                         onClick={onSignUpClicked}
                     >

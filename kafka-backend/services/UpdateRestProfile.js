@@ -9,9 +9,7 @@ async function handle_request(msg, callback) {
     }
     ).then(
         result=>{
-        //    console.log("found"+JSON.stringify(result));
         callback(null, result);
-          res.send(result)
         },
         err=>{
             console.error(err);

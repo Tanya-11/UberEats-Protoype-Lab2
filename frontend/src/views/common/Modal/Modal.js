@@ -14,21 +14,19 @@ const Modal = () => {
 
 
     const logOut = () => {
-        Axios.post('http://3.129.16.0:3001/api/logout',{
-            user:customer.user_id
+        Axios.post('http://3.129.16.0:3001/api/logout', {
+            user: customer.user_id
         })
-        .then(res=>{
-            console.log("333333333333333333334444444444444444");
-            console.log(res.data);
-           
-            dispatch({ type: ACTIONS.USER_LOGOUT });
-        })
-        .catch(err=>console.log(err))
+            .then(res => {
+
+                dispatch({ type: ACTIONS.USER_LOGOUT });
+            })
+            .catch(err => console.log(err))
     }
     return (
-        <div class="Modal">
-            <ul>
-                <li
+        <div class="modal-container">
+            <ul className="modal-list-items">
+                <li className="modal-list-item"
                     onClick={() => {
                         history.push('/customer-profile')
                     }}
@@ -36,7 +34,7 @@ const Modal = () => {
                     Profile
                 </li>
                 <hr />
-                <li
+                <li className="modal-list-item"
                     onClick={() => {
                         history.push('/dashboard/order-details/past-orders')
                     }}
@@ -44,7 +42,7 @@ const Modal = () => {
                     Orders
                 </li>
                 <hr />
-                <li onClick={logOut}>
+                <li className="modal-list-item" onClick={logOut}>
                     Log Out <LogoutIcon />
                 </li>
             </ul>

@@ -84,8 +84,8 @@ const CustomerProfile = () => {
     return (
         <div class="CustomerProfile">
             <div class="leftContent">
-                <ul>
-                    <li class="uber-logo" onClick={navigateToDashboard}></li>
+                <ul className="customer-profile-wrapper">
+                    <li className="uber-logo" onClick={navigateToDashboard}></li>
                     <li onClick={setShowState}>About</li>
                     <li onClick={setShowState}>Favorites</li>
                 </ul>

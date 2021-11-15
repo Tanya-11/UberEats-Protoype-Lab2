@@ -3,12 +3,15 @@
     grid-template-columns: 20% 80%;
     height: 100%;
 }
-.left-content {
+.customer-orders > .left-content {
     grid-column: 1;
     border-radius: 0px;
-    background: #aaf3d0;
+    background :#f2f0f0;
 }
-ul {
+.orders-wrapper {
+    width: 60vw;
+}
+/* ul {
     margin: 0;
     padding: 0;
 }
@@ -20,14 +23,12 @@ li {
 }
 li:hover {
     background-color: white;
-}
-.right-content {
+} */
+.customer-orders > .right-content {
     grid-column: 2;
     margin-left: 3%;
 }
-.wrapper {
-    width: 60vw;
-}
+
 .container-fluid {
     float: left;
     width: 87%;
@@ -35,18 +36,23 @@ li:hover {
 
 .order-box {
     border-radius: 5px;
-    background: #aaf3d0;
+    background: #f2f0f0;
     padding: 10px;
     font-size: smaller;
     margin: 2px;
 }
-input {
+.view-receipt-btn {
     border: 0;
     background: transparent;
     text-decoration: underline;
     font-size: smaller;
 }
 .badge {
-    background-color: grey;
+    background-color: white;
     padding: 5%;
+    border: 1px solid #ded9d9;
+}
+.nav-link{
+    color:black;
+    font-weight: bold;
 }

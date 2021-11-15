@@ -56,7 +56,7 @@ const PastOrders = () => {
       };
 
     return (
-        <div class="wrapper">
+        <div class="orders-wrapper">
             <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
@@ -83,7 +83,7 @@ const PastOrders = () => {
                                 </span>
                                 <div>
                                     Ordered for ${el.price} on {moment(el.date).format('LLL')}
-                                    <input
+                                    <input className="view-receipt-btn"
                                         type="submit"
                                         value="View Receipt"
                                         onClick={() =>
@@ -119,6 +119,7 @@ const PastOrders = () => {
                         modal={viewReceipt}
                         data={receipt}
                         total={total}
+                        instructions = {instructions}
                     ></ReceiptModal>
                 )}
                 <Pagination count={5} shape="rounded" onChange={handleChangeForPageNo} />

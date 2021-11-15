@@ -166,24 +166,22 @@ const Cart = () => {
                                     <td>${order.text * +order.price}</td>
                                 </tr>
                             ))}
-                            <tr style="total">
+                            <tr className="total">
                                 <td>Total</td>
                                 <td />
                                 <td>${total}</td>
                             </tr>
                         </tbody>
                     </Table>
-                    <div class="addr">
-                        <span>
+                    <div class="instructions">
                             Instructions:
-                            <input
-                                type="text"
+                            <textarea
+                                // type="text"
                                 value={instructions}
                                 onChange={(e) => {
                                     setInstructions(e.target.value)
                                 }}
                             />
-                        </span>
                         {/* <span style={{ display: 'inline-flex' }}>
                             Mode:
                             {

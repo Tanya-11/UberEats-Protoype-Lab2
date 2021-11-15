@@ -1,8 +1,5 @@
-var connection =  new require('./kafka/Connection');
+var connection =  new require('./kafka/connection');
 //topics files
-//var signin = require('./services/signin.js');
-var Books = require('./services/books.js');
-
 /*******************************************Common Services***************************************************/
 var signUp = require('./services/SignUp');
 var login = require('./services/LogIn')

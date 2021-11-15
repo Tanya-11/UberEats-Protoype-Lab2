@@ -11,12 +11,14 @@
 .RestImg > img {
     width: inherit;
     height: inherit;
-    object-fit: cover;
+    object-fit: fill;
 }
 
 .RestdescWrapper {
     padding-right: 5px;
     padding-left: 5px;
+    font-family: UberMoveText, sans-serif;
+
 }
 .Restdesc {
     height: 2rem;
@@ -24,7 +26,9 @@
     padding: 0 1.5% 1.5%;
     height: 8%;
     margin-top: 0.5rem;
-    font-size: 1rem;
+    line-height: 20px;
+    font-weight: normal;
+    font-size: 14px;
 }
 
 .dishcardWrapper {
@@ -32,7 +36,7 @@
 }
 .dishcards {
     display: grid;
-    grid-template-rows: repeat(3, 7.4rem);
-    grid-template-columns: repeat(3, 13.6rem);
+    grid-template-rows: repeat(3, 10.4rem);
+    grid-template-columns: repeat(3, 28rem);
     grid-gap: 1rem;
 }

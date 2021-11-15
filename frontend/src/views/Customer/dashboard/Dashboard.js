@@ -59,28 +59,24 @@ const Dashboard = () => {
 
     return (
         <div class="dashboardContent">
-            <div class="leftContent">
+            <div class="dashboard-leftContent">
                 <div class="mode" onChange={(e) => handleChange(e)}>
-                    <label>
-                        <input type="checkbox" value={!searchData.delivery} name="delivery"
+                    <label className="dashboard-label">
+                        <input className="dashboard-input" type="checkbox" value={!searchData.delivery} name="delivery"
                             // checked={searchData.delivery}
                              />
-                        Delivery
+                        <span className="">Delivery</span>
                     </label>
-                    <label>
-                        <input type="checkbox" value={!searchData.pickUp} name="pickUp"
+                    <label className="dashboard-label">
+                        <input  className="dashboard-input" type="checkbox" value={!searchData.pickUp} name="pickUp"
                             // checked={searchData.pickUp}
                              />
                         Pick Up
                     </label>
-                    {/* <label>
-                        <input type="radio" value="both" name="mode"
-                            checked={searchData.mode === 'both'} />
-                        Both
-                    </label> */}
+
                 </div>
-                <div class="location">
-                    <input
+                <div className="location">
+                    <input className="dashboard-input"
                         type="text"
                         name="city"
                         value={searchData.city}
@@ -89,19 +85,19 @@ const Dashboard = () => {
                     />
                 </div>
                 <div class="category" onChange={(e) => handleChange(e)}>
-                    <label>
-                        <input type="radio" value="Vegetarian" name="category"
+                    <label className="dashboard-label">
+                        <input  className="dashboard-input" type="radio" value="Vegetarian" name="category"
                             checked={searchData.category === 'Vegetarian'} />
                         Vegetarian
                     </label>
-                    <label>
-                        <input type="radio" value="Halal" name="category" 
+                    <label  className="dashboard-label">
+                        <input className="dashboard-input" type="radio" value="Halal" name="category" 
                             checked={searchData.category === 'Halal'}/>
                         Halal
                     </label>
                 </div>
                 <div class="search">
-                    <input
+                    <input className="dashboard-input"
                         type="text"
                         name="searchTabText"
                         value={searchData.searchTabText}
@@ -110,7 +106,7 @@ const Dashboard = () => {
                     />
                 </div>
             </div>
-            <div class="rightContent">
+            <div class="dashboard-rightContent">
                 {restData && restData.length>0 &&  restData.map((result, i) => (
                     <RestCard key={i} data={result}></RestCard>
                 ))}

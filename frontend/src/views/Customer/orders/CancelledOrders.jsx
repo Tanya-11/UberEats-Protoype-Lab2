@@ -21,6 +21,7 @@ const CustomerCancelledOrders = () => {
     const [pageSize, setPageSize] = React.useState(5);
     const [pageNo, setPageNo] = React.useState(1);
     const [errorMsg, setErrorMsg] = useState('')
+    const [instructions, setInstructions] = useState('')
 
 
     useEffect(() => {
@@ -50,11 +51,12 @@ const CustomerCancelledOrders = () => {
             })
     }
 
-    const viewReceipt = (val, receipt, total) => {
+    const viewReceipt = (val, receipt, total, instructions='') => {
         console.log(val)
         setShowHide(val)
         setReceipt(receipt)
         setTotal(total)
+        setInstructions(instructions)
         console.log(showHide)
     }
     const handleChangeForSize = (event) => {
@@ -72,7 +74,7 @@ const CustomerCancelledOrders = () => {
 
     //   render() {
     return (
-        <div class="wrapper">
+        <div class="orders-wrapper">
             <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
@@ -101,10 +103,10 @@ const CustomerCancelledOrders = () => {
                                     </span>
                                     <div>
                                         Ordered for ${el.price} on {moment(el.date).format('LLL')}
-                                        <input
+                                        <input className="view-receipt-btn"
                                             type="submit"
                                             value="View Receipt"
-                                            onClick={() => viewReceipt(true, el?.dishes, el.price)}
+                                            onClick={() => viewReceipt(true, el?.dishes, el.price, el?.instructions)}
                                         />
                                     </div>
                                 </Col>
@@ -129,6 +131,7 @@ const CustomerCancelledOrders = () => {
                         modal={viewReceipt}
                         data={receipt}
                         total={total}
+                        instructions = {instructions}
                     ></ReceiptModal>
                 )}
                 <Pagination count={5} shape="rounded" onChange={handleChangeForPageNo}/>

@@ -1,5 +1,5 @@
 const express = require("express");
-// const session = require("express-session");
+const session = require("express-session");
 // const db = require('./utils/database');
 const mongoose = require('mongoose');
 var kafka = require('./kafka/client');
@@ -55,33 +55,25 @@ const upload = multer({
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
+
+app.use(express.urlencoded({ extended: true }));
+app.use(session({
+  secret: "some-secret",
+  resave: false,
+  saveUninitialized: false,
+  duration: 60 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+}));
 app.use('/images', express.static('images'));
 app.use(
   cors(
     {
-      origin: 'http://18.191.91.254:3000',
-      // methods: ["GET", "POST", "PUT", "PATCH"],
+      origin: 'http://3.129.16.0:3000',
+      methods: ["GET", "POST", "PUT", "PATCH"],
       credentials: true,
     }
   )
 );
-// app.use(express.urlencoded({ extended: true }));
-// app.use(session({
-//   secret: "some-secret",
-//   resave: false,
-//   saveUninitialized: false,
-//   duration: 60 * 60 * 1000,
-//   activeDuration: 5 * 60 * 1000,
-// }));
-
-// mongoose.connect(
-//   'mongodb+srv://admin:admin@cluster0.lceyg.mongodb.net/UberEats?retryWrites=true&w=majority',{useNewUrlParser:true})
-// // passport.use(Customer.createStrategy());
-// passport.serializeUser(function(user, done) {
-//   console.log('us'+user);
-//   done(null, user.id);
-// });
-
 app.use(passport.initialize());
 app.use("/api", authRouter)
 app.use("/api", restaurantRouter)
@@ -90,8 +82,6 @@ app.use("/api", customerRouter)
 
 
 //---------------------------------------------END OF MIDDLEWARE------------------------------------------------------------
-
-const saltRounds = 10;
 
 
 router.post('/upload/photo', upload.single('image'), (req, res) => {

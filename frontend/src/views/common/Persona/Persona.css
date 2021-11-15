@@ -1,4 +1,4 @@
-.Persona > h1 {
+.Persona > .ubereats-heading {
     text-align: center;
 }
 .Persona > .PersonaWrapper {
@@ -16,7 +16,8 @@
     margin: auto;
     border: solid black;
 }
-h2 {
+
+.persona-heading {
     text-align: center;
 }
 
@@ -28,6 +29,4 @@ h2 {
     content: url('../../../assets/customer-rest.png');
     border: solid black;
 }
-.customer > h2 {
-    text-align: center;
-}
+

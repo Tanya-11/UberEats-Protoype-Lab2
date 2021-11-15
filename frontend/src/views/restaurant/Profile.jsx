@@ -18,7 +18,7 @@ class RestProfile extends Component {
 
     render() {
         return (
-            <Navbar bg="dark" variant="dark" expand="lg">
+            <Navbar bg="light" variant="light" expand="lg">
                 <Container>
                     <Navbar.Brand>Restaurant Dashboard</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />

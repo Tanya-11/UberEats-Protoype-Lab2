@@ -141,24 +141,24 @@ export const LoginPage = (props) => {
             })
     }
     return (
-        <div class="login-container">
-            <div class="login-wrapper">
-                <div class="logo" onClick={goToPersons} />
-                <h1>Welcome Back</h1>
+        <div className="login-container">
+            <div className="login-wrapper">
+                <div className="logo" onClick={goToPersons} />
+                <h2>Welcome Back</h2>
                 {errorMsg && (
-                    <Alert variant="danger" class="fail">
+                    <Alert variant="danger" className="danger">
                         {errorMsg}
                     </Alert>
                 )}
-                <div class="login-form">
-                    <input
+                <div className="login-form">
+                    <input className ="login-input"
                         value={emailValue}
                         onChange={(e) => setEmailValue(e.target.value)}
                         type="email"
                         placeholder={emailPlaceholder}
                     />
                     {
-                        <input
+                        <input className ="login-input"
                             value={passwordValue}
                             onChange={(e) => setPasswordValue(e.target.value)}
                             type="password"
@@ -166,13 +166,13 @@ export const LoginPage = (props) => {
                         />
                     }
 
-                    <button
+                    <button className ="login-btn"
                         // disabled={!emailValue || !passwordValue}
                         onClick={(e) => onNextClicked(e)}
                     >
                         Next
                     </button>
-                    <button
+                    <button className ="login-btn"
                         onClick={() => {
                             history.push(signUpURL)
                             //  dispatchInProgressAction(props.data)

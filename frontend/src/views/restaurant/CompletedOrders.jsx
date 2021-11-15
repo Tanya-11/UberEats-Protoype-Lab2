@@ -24,7 +24,7 @@ const CompleteOrders = () => {
     const [userInfo, setUserInfo] = useState('')
     const [isClicked, setIsClicked] = useState(false)
     const [orders, setOrders] = useState([])
-    const orderStatus = ['Received', 'Delivered', 'Preparing', 'Picked Up', 'Placed']
+    const orderStatus = ['Received', 'Delivered', 'Preparing', 'Picked Up', 'Placed', 'Cancel']
 
     const getOrders = Axios.post('http://3.129.16.0:3001/api/orders/complete', {
         user: restaurant,
@@ -147,8 +147,7 @@ const CompleteOrders = () => {
     }
 
     return (
-        <div>
-            {/* <h1>{completedOrders.length}</h1> */}
+        <div style={{padding:"2rem"}}>            {/* <h1>{completedOrders.length}</h1> */}
             <Table striped bordered hover>
                 <thead>
                     <tr>

@@ -62,7 +62,7 @@ const RestCard = (props) => {
                 {image && <img src={`http://3.129.16.0:3001/api/images/${image}`} />}
             </div>
             <div class="rest-name-container">
-                <h3 class="title"> {props.data.name}</h3>
+                <span class="title"> {props.data.name}</span>
                 <div onClick={setfavData}>
                     {isFav !== null && (
                         <>

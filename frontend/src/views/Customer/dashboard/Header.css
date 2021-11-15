@@ -6,12 +6,12 @@
     justify-content: space-between;
 }
 
-.header-container > .uber-logo {
+.uber-logo {
     grid-column: 2;
     content: url('../../../assets/Uber_Eats.svg');
     object-fit: scale-down;
 }
-.header-container > .toggle-switch {
+/* .header-container > .toggle-switch {
     height: 2rem;
 }
 .header-container > .location {
@@ -21,19 +21,19 @@
     height: inherit;
     background-color: lightgray;
     border: 0;
-}
-.search {
+} */
+/* .search {
     height: 2rem;
 }
 .search > input {
     height: inherit;
     background-color: lightgray;
     border: 0;
-}
+} */
 .cart {
     position: relative;
 }
-.cart > button {
+.cart-btn-wrapper {
     width: 4rem;
     height: 2rem;
     display: flex;
@@ -41,12 +41,12 @@
     border-radius: 500px;
     border: 0;
 }
-.cart > button > .cartIcon {
+.cartIcon {
     color: white;
     border-radius: 500px;
     align-self: center;
 }
-.cart > button > input {
+.cart-btn {
     width: 50%;
     background-color: transparent;
     color: white;

@@ -6,42 +6,43 @@
 .CustomerProfile > .leftContent {
     grid-column: 1;
     border-radius: 0px;
-    background: #6c962c;
-    box-shadow: 18px 18px 36px #46621d, -18px -18px 36px #92cb3b;
+    background: #f2f0f0;
+    box-shadow: 18px 18px 36px #ded9d9, -18px -18px 36px #ded9d9;
 }
-.CustomerProfile > .leftContent > ul {
+.CustomerProfile > .leftContent > .customer-profile-wrapper {
     margin: 0;
     padding: 0;
 }
-.CustomerProfile > .leftContent > ul > .uber-logo {
-    content: url('../../../assets/Uber_Eats.svg');
-    object-fit: scale-down;
-}
-.CustomerProfile > .leftContent > ul > li {
+.CustomerProfile > .leftContent > .customer-profile-wrapper > li {
     list-style-type: none;
     margin: 10%;
     cursor: pointer;
     font-weight: 800;
 }
 
-.rightContent {
+.CustomerProfile > .leftContent > .customer-profile-wrapper > .uber-logo {
+    content: url('../../../assets/Uber_Eats.svg');
+    object-fit: scale-down;
+}
+
+.CustomerProfile > .rightContent {
     grid-column: 2;
     margin-left: 3%;
 }
-.rightContent > label {
+.profile-label {
     display: flex;
     margin: 2%;
 
     align-items: center;
 }
-.rightContent > label > input {
+.profile-input {
     margin-left: 3%;
 }
-.rightContent > label > button {
+.customer-profile-submit-btn {
     border: 0;
     margin-left: 5%;
     border-radius: 32px;
     height: 40px;
-    background: #4d962c;
+    background: #f2f0f0;
     cursor: pointer;
 }

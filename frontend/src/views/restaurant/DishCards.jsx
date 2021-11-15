@@ -68,7 +68,7 @@ const DishCard = (props) => {
     }
     return (
         <div>
-            <div class="dish-card-wrapper">
+            <div className="dish-card-wrapper">
                 <label>
                     Name:
                     <input
@@ -115,7 +115,7 @@ const DishCard = (props) => {
                     size="sm"
                     variant="secondary"
                     type="submit"
-                    class="submit"
+                    className="submit"
                     disabled={!changed}
                     onClick={submitDishData}
                 >

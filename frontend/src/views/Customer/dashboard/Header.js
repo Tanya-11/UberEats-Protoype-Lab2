@@ -40,9 +40,9 @@ const Header = () => {
         <div class="header-container">
             <div class="uber-logo" onClick={navigateToDashboard}></div>
             <div class="cart">
-                <button onClick={goToOrder}>
-                    <ShoppingCartOutlinedIcon class="cartIcon" />
-                    <input type="text" disabled value={cartLen}></input>
+                <button onClick={goToOrder} className="cart-btn-wrapper">
+                    <ShoppingCartOutlinedIcon className="cartIcon" />
+                    <input className="cart-btn" type="text" disabled value={cartLen}></input>
                 </button>
             </div>
             {showCartPopUp && <CartModal data={showCartPopUp} modal={goToOrder}></CartModal>}

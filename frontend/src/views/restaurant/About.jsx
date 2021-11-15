@@ -7,12 +7,8 @@ import NativeSelect from '@mui/material/NativeSelect'
 
 const About = () => {
     const restaurant = useSelector((state) => state.restLogin.user)
-    const [startOpenHrs, setStartOpenHrs] = useState('00:00:00')
-    const [endOpenHrs, setEndOpenHrs] = useState('00:00:00')
-    const mode = {
-        delivery: false,
-        pickedUp: false,
-    }
+    const [startOpenHrs, setStartOpenHrs] = useState('00:00')
+    const [endOpenHrs, setEndOpenHrs] = useState('00:00')
     const [restData, setRestData] = useState({
         name: '',
         username: restaurant,
@@ -92,7 +88,7 @@ const About = () => {
             // deliveryMode.delivery:
             // deliveryMode.pickedUp:
             //   deliveryMode:prevState.deliveryMode.includes('delivery') && prevState.deliveryMode.includes('pick')?value :prevState.deliveryMode.concat(value),
-            openHrs: `${startOpenHrs} - ${endOpenHrs}`,
+             openHrs: `${startOpenHrs} - ${endOpenHrs}`,
         }))
 
         console.log(restData)
@@ -115,24 +111,14 @@ const About = () => {
     }
 
     const handleChangeOpenHrs = (e) => {
-        console.log(e)
-        setChanged(true)
-        // if (e.name === 'startOpenHrs') setStartOpenHrs(e.value)
-        // if (e.name === 'endOpenHrs') {
-        //     if (e.value > startOpenHrs) {
-        //     setEndOpenHrs(e.value)
+        console.log(e.target.name)
+       setChanged(true)
+        if (e.target.name === 'startOpenHrs') setStartOpenHrs(e.target.value)
+        if (e.target.name === 'endOpenHrs') setEndOpenHrs(e.target.value)
         setRestData((prevState) => ({
             ...prevState,
             openHrs: `${startOpenHrs} - ${endOpenHrs}`,
         }))
-        // } else {
-        //     setEndOpenHrs(0)
-        //     setOpenHrsMsg('End Hrs should be greater than Start Hr')
-        // }
-
-        console.log(startOpenHrs)
-        console.log(endOpenHrs)
-        console.log(restData)
     }
 
     const submitRestaurantData = () => {
@@ -153,6 +139,8 @@ const About = () => {
                 console.log(JSON.parse(res[0].config.data))
                 //  localStorage.setItem('deliveryMode', restData.deliveryMode)
                 setImage(res[1]?.data.imageURL)
+                setChanged(false);
+
             })
             .catch((err) => {
                 throw err
@@ -167,7 +155,7 @@ const About = () => {
         // })
     }
     return (
-        <div class="rightContent">
+        <div className="rest-about-rightContent">
             {image && (
                 <img
                     style={{
@@ -180,61 +168,61 @@ const About = () => {
                     src={`http://3.129.16.0:3001/api/images/${image}`}
                 />
             )}
-            <label class="label">
-                Name:
-                <input
+            <label className="rest-label-container">
+               <span className="rest-label"> Name </span>
+                <input className="rest-input"
                     type="text"
                     name="name"
                     onChange={(e) => handleChange(e)}
                     value={restData.name}
                 ></input>
             </label>
-            <label class="label">
-                Email
-                <input
+            <label className="rest-label-container">
+            <span className="rest-label"> Email </span>
+                <input className="rest-input"
                     type="text"
                     name="username"
                     onChange={(e) => handleChange(e)}
                     value={restData.username}
                 ></input>
             </label>
-            <label class="label">
-                Phone
-                <input
+            <label className="rest-label-container">
+            <span className="rest-label">  Phone </span> 
+                <input className="rest-input"
                     type="number"
                     name="phoneNo"
                     onChange={(e) => handleChange(e)}
                     value={restData.phoneNo}
                 ></input>
             </label>
-            <label class="label">
-                Address
-                <input
+            <label className="rest-label-container">
+            <span className="rest-label">  Address</span> 
+                <input className="rest-input"
                     name="addressLine1"
                     onChange={(e) => handleChange(e)}
                     value={restData.addressLine1}
                 ></input>
             </label>
-            <label class="label">
-                City
-                <input
+            <label className="rest-label-container">
+            <span className="rest-label"> City</span> 
+                <input className="rest-input"
                     type="text"
                     name="city"
                     onChange={(e) => handleChange(e)}
                     value={restData.city}
                 ></input>
             </label>
-            <label class="label">
-                State
-                <input
+            <label className="rest-label-container">
+            <span className="rest-label"> State</span> 
+                <input className="rest-input"
                     type="text"
                     name="state"
                     onChange={(e) => handleChange(e)}
                     value={restData.state}
                 ></input>
             </label>
-            <label class="label">
-                Country
+            <label className="rest-label-container">
+            <span className="rest-label">  Country</span> 
                 <NativeSelect
                     inputProps={{
                         name: 'country',
@@ -250,35 +238,33 @@ const About = () => {
 
                 </NativeSelect>
             </label>
-            <label class="label">
-                Opening Hrs
-                <input
+            <label className="rest-label-container">
+            <span className="rest-label">  Opening Hrs</span> 
+                <input className="rest-input"
                     type="time"
                     name="startOpenHrs"
                     onChange={(e) => {
-                        setChanged(true)
-                        setStartOpenHrs(e.target.value)
+                        handleChangeOpenHrs(e)
                     }}
                     value={startOpenHrs}
                 ></input>
-                <input
+                <input className="rest-input"
                     type="time"
                     name="endOpenHrs"
                     onChange={(e) => {
-                        setChanged(true)
-                        setEndOpenHrs(e.target.value)
+                        handleChangeOpenHrs(e)
                     }}
                     value={endOpenHrs}
                 ></input>
             </label>
             <div
-                class="mode"
+                className="mode"
                 //  onChange={(e) => handleChange(e)}
             >
-                <label class="label">
-                    Mode:
+                <label className="rest-label-container">
+                <span className="rest-label" > Mode</span> 
                     <label style={{ width: '100px' }}>
-                        <input
+                        <input className="rest-input"
                             type="checkbox"
                             value={!restData?.delivery}
                             name="delivery"
@@ -287,8 +273,8 @@ const About = () => {
                         />
                         Delivery
                     </label>
-                    <label style={{ width: '100px' }}>
-                        <input
+                    <label style={{ width: '100px' }} classNameName="rest-label-container">
+                        <input className="rest-input"
                             type="checkbox"
                             value={!restData?.pickedUp}
                             name="pickedUp"
@@ -307,10 +293,13 @@ const About = () => {
                         Both
                     </label> */}
                 </label>
-                <input
+                <input className="rest-input"
                     type="file"
                     name="image"
-                    onChange={(e) => setFile(e.target.files[0])}
+                    onChange={(e) =>  
+                        {setChanged(true)
+                         setFile(e.target.files[0])
+                    }}
                     accept="image/*"
                 />
             </div>
@@ -330,7 +319,7 @@ const About = () => {
             <Button
                 variant="primary"
                 type="submit"
-                class="submit-button"
+                className="submit-button"
                 disabled={!changed}
                 onClick={submitRestaurantData}
             >

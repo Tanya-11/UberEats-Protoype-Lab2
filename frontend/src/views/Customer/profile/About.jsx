@@ -112,9 +112,9 @@ export const About = (props) => {
                     src={`http://3.129.16.0:3001/api/images/${image}`}
                 />
             )}
-            <label>
+            <label className="profile-label">
                 Name:
-                <input
+                <input className="profile-input"
                     type="text"
                     name="name"
                     onChange={(e) => handleChange(e)}
@@ -123,9 +123,9 @@ export const About = (props) => {
                 ></input>
             </label>
 
-            <label>
+            <label className="profile-label">
                 Email
-                <input
+                <input className="profile-input"
                     type="text"
                     name="username"
                     onChange={(e) => handleChange(e)}
@@ -133,9 +133,9 @@ export const About = (props) => {
                     value={userData.username}
                 ></input>
             </label>
-            <label>
+            <label className="profile-label">
                 Nick Name
-                <input
+                <input className="profile-input"
                     type="text"
                     name="nickName"
                     onChange={(e) => handleChange(e)}
@@ -143,9 +143,9 @@ export const About = (props) => {
                     value={userData.nickName}
                 ></input>
             </label>
-            <label>
+            <label className="profile-label">
                 Phone
-                <input
+                <input className="profile-input"
                     type="number"
                     name="phoneNo"
                     onChange={(e) => handleChange(e)}
@@ -154,9 +154,9 @@ export const About = (props) => {
                     pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                 ></input>
             </label>
-            <label>
+            <label className="profile-label">
                 City
-                <input
+                <input className="profile-input"
                     type="text"
                     name="city"
                     onChange={(e) => handleChange(e)}
@@ -164,9 +164,9 @@ export const About = (props) => {
                     value={userData.city}
                 ></input>
             </label>
-            <label>
+            <label className="profile-label">
                 State
-                <input
+                <input className="profile-input"
                     type="text"
                     name="state"
                     onChange={(e) => handleChange(e)}
@@ -174,7 +174,7 @@ export const About = (props) => {
                     value={userData.state}
                 ></input>
             </label>
-            <label>
+            <label className="profile-label">
                 Country :
                 <NativeSelect
                     inputProps={{
@@ -191,7 +191,7 @@ export const About = (props) => {
 
                 </NativeSelect>
             </label>
-            <input
+            <input className="profile-input"
                 type="file"
                 name="image"
                 onChange={(e) => setFile(e.target.files[0])}
@@ -199,7 +199,8 @@ export const About = (props) => {
             />
             {/* <button type="submit">Submit</button> */}
             {!props.disabled && (
-                <button type="submit" disabled={!changed} onClick={submitCustomerData}>
+                <button  className="customer-profile-submit-btn"
+                type="submit" disabled={!changed} onClick={submitCustomerData}>
                     Save Changes
                 </button>
             )}

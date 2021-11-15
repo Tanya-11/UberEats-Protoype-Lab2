@@ -5,7 +5,7 @@ const dev = process.env.NODE_ENV !== "production"
 
 exports.COOKIE_OPTIONS = {
   httpOnly: true,
-  // Since 18.191.91.254 is not having https protocol,
+  // Since 3.129.16.0 is not having https protocol,
   // secure cookies do not work correctly (in postman)
   secure: !dev,
   signed: true,
