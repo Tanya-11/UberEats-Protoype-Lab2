@@ -12,6 +12,7 @@ async function handle_request(msg, callback) {
                 {'orderStatus':{ $ne: 'Delivered'}},
                 {'orderStatus':{ $ne: 'PickedUp'}},
                 {'orderStatus':{ $ne: 'Cancelled'}}
+                {'orderStatus':{ $ne: 'Cancel'}}
 
                 ]
             }
