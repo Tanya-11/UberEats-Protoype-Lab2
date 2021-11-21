@@ -23,6 +23,7 @@ const dish = new Schema({
   },
   price: {
     type: Number,
+    min:1
     // required: true
   },
   description: {

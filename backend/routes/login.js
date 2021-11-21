@@ -19,7 +19,7 @@ router.post("/signup", async (req, res, next) => {
     console.log("Inside signUp");
     console.log(err);
     console.log(results);
-    if (err) {
+    if (err || results.statusCode == 400) {
       console.log("Inside err" + err);
       res.status(400).end();
     } else {

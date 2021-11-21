@@ -7,7 +7,8 @@ import { Button } from 'react-bootstrap'
 
 const DishCard = (props) => {
     const restaurant = useSelector((state) => state.restLogin.user)
-    const [dishData, setDishData] = useState([])
+    const [dishData, setDishData] = useState([]);
+    const [error, setErrorMsg] = useState('');
     /**
      * {
         dishId: 0,
@@ -64,11 +65,21 @@ const DishCard = (props) => {
             })
             .catch((err) => {
                 console.log(err)
+                setErrorMsg("Error! Try again")
+                setTimeout(() => {
+                    setErrorMsg("")
+                    window.location.reload()
+                }, 3000)
+              
             })
     }
     return (
         <div>
             <div className="dish-card-wrapper">
+                {
+                    error &&  <label>{error}</label>
+                }
+               
                 <label>
                     Name:
                     <input

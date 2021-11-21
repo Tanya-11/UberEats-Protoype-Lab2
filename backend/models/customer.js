@@ -20,7 +20,7 @@ const Session = new Schema({
  const customerSchema = new Schema({
      username: {
          type:String,
-         required: true
+         required: true,
          index: { unique: true }
      },
      name: {

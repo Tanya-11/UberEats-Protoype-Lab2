@@ -29,6 +29,7 @@ ingredients: {
 // },
 price: {
   type: Number,
+  min:1
   // required: true
 },
 description: {

@@ -18,12 +18,6 @@ async function handle_request(msg, callback) {
           category: msg.category,
         });
         user.dishes.push(dish);
-        //    user.save((err,response)=>{
-        //         if(err) console.log(err);
-        //         else  console.log('in else'+response);
-        //     })
-        // updates the address while keeping its schema
-        // address.zipCode = msg.zipCode; // individual fields can be set directly
       } else {
         address.set(msg);
       }
@@ -33,7 +27,7 @@ async function handle_request(msg, callback) {
       console.log(resp);
      callback(null,{resp})
     })
-    .catch((e) => callback(null,{'statusCode':500, "err":err}));
+    .catch((e) => callback({'statusCode':500, "err":err}, null));
 }
 
 exports.handle_request = handle_request;
