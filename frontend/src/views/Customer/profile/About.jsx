@@ -47,11 +47,11 @@ export const About = (props) => {
                 'content-type': 'multipart/form-data',
             },
         }
-        const setProfile = Axios.post('http://3.129.16.0:3001/api/customer/profile/save', {
+        const setProfile = Axios.post('http://localhost:3001/api/customer/profile/save', {
             ...userData,
             userId: customer,
         })
-        const setPhoto = Axios.post('http://3.129.16.0:3001/api/upload/photo', formData, config)
+        const setPhoto = Axios.post('http://localhost:3001/api/upload/photo', formData, config)
         Promise.all([setProfile, setPhoto])
 
             .then((res) => {
@@ -87,10 +87,10 @@ export const About = (props) => {
                 'content-type': 'multipart/form-data',
             },
         }
-        //  const result = await Axios.post('http://3.129.16.0:3001/upload-pic', formData, config)
+        //  const result = await Axios.post('http://localhost:3001/upload-pic', formData, config)
         //  setImage(result.data.imagePath)
         //  setImage('image/3fe4ee4f70dfcfc6cf0fc7acb09ea0f5')
-        //   const result = await Axios.get('http://3.129.16.0:3001/fetch-file')
+        //   const result = await Axios.get('http://localhost:3001/fetch-file')
         //   console.log(result.data[0])
         //  setImage(result.data[1].image)
         // console.log(res);
@@ -109,7 +109,7 @@ export const About = (props) => {
                         margin: '12%',
                         float: 'right',
                     }}
-                    src={`http://3.129.16.0:3001/api/images/${image}`}
+                    src={`http://localhost:3001/api/images/${image}`}
                 />
             )}
             <label className="profile-label">

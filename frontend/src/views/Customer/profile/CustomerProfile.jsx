@@ -36,7 +36,7 @@ const CustomerProfile = () => {
     }, [])
 
     const getCustomerData = () => {
-        Axios.post('http://3.129.16.0:3001/api/customer/profile', {
+        Axios.post('http://localhost:3001/api/customer/profile', {
             username: customer,
         })
             .then((res) => {

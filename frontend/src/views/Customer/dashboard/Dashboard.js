@@ -21,11 +21,11 @@ const Dashboard = () => {
     Axios.defaults.withCredentials = true
 
 
-    const getRestData = Axios.post('http://3.129.16.0:3001/api/search', {
+    const getRestData = Axios.post('http://localhost:3001/api/search', {
         searchData:searchData
     })
 
-    const getFavData = Axios.post('http://3.129.16.0:3001/api/favs', {
+    const getFavData = Axios.post('http://localhost:3001/api/favs', {
         user: customer,
     })
     useEffect(() => {

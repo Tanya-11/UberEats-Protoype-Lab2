@@ -26,7 +26,7 @@ const ActiveOrders = () => {
     const [orders, setOrders] = useState([])
     const orderStatus = ['Received', 'Delivered', 'Preparing', 'Picked Up', 'Placed','Cancel']
 
-    const getOrders = Axios.post('http://3.129.16.0:3001/api/orders/active', {
+    const getOrders = Axios.post('http://localhost:3001/api/orders/active', {
         user: restaurant,
         orderStatus: 'Placed',
     })
@@ -130,7 +130,7 @@ const ActiveOrders = () => {
             console.log(activeOrders[i].orderId)
             console.log(i)
             res.push(
-                await Axios.post('http://3.129.16.0:3001/api/orders/update/status', {
+                await Axios.post('http://localhost:3001/api/orders/update/status', {
                     orderId: activeOrders[i].orderId,
                     orderStatus: activeOrders[i].orderStatus,
                     date: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),

@@ -11,7 +11,7 @@ async function handle_request(msg, callback) {
             {$and: [
                 {'orderStatus':{ $ne: 'Delivered'}},
                 {'orderStatus':{ $ne: 'PickedUp'}},
-                {'orderStatus':{ $ne: 'Cancelled'}}
+                {'orderStatus':{ $ne: 'Cancelled'}},
                 {'orderStatus':{ $ne: 'Cancel'}}
 
                 ]

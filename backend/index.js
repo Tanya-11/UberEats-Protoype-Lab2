@@ -68,7 +68,7 @@ app.use('/images', express.static('images'));
 app.use(
   cors(
     {
-      origin: 'http://3.129.16.0:3000',
+      origin: 'http://localhost:3000',
       methods: ["GET", "POST", "PUT", "PATCH"],
       credentials: true,
     }

@@ -11,7 +11,7 @@ const PrivateRoute = (restOfProps) => {
     let isAuth = userLoginStatus.isLoggedIn || restLoginStatus.isLoggedIn
     Axios.defaults.withCredentials = true
     const verifyUser = useCallback(() => {
-        Axios.get('http://3.129.16.0:3001/api/refreshToken')
+        Axios.get('http://localhost:3001/api/refreshToken')
             .then(async (response) => {
                 console.log(response)
                 if (response) {

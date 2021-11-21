@@ -21,6 +21,7 @@ const Session = new Schema({
      username: {
          type:String,
          required: true
+         index: { unique: true }
      },
      name: {
         type:String,
@@ -32,6 +33,7 @@ const Session = new Schema({
     },
      phone:  {
         type:Number,
+        index: { unique: true }
         // required: true
     },
      addressLine1:  {

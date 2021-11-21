@@ -38,7 +38,8 @@ const dish = new Schema({
 const restaurnatSchema = new Schema({
     username: {
         type:String,
-        required: true
+        required: true,
+        index: { unique: true }
     },
     password: {
         type:String,
@@ -82,7 +83,7 @@ const restaurnatSchema = new Schema({
   },
   phoneNo:  {
     type:Number,
-    // required: true
+    index: { unique: true }
 },
 refreshToken: {
     type: [Session],

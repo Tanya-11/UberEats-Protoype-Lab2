@@ -45,7 +45,7 @@ const SignUpPage = (props) => {
         }
     }, [])
     const onSignUpClicked = () => {
-        Axios.post('http://3.129.16.0:3001/api/signup', {
+        Axios.post('http://localhost:3001/api/signup', {
             name: nameValue,
             username: emailValue,
             password: passwordValue,
@@ -67,9 +67,7 @@ const SignUpPage = (props) => {
                         user_id:res?.data.user
                     }))
                     
-                }
-                console.log(signUpURL)
-  
+                }  
                 history.push(signUpURL)
             })
             .catch((err) => {
@@ -78,7 +76,7 @@ const SignUpPage = (props) => {
                 if(props.data ==='customer')
                 dispatch(
                     userLogInFail({
-                        text: token ||null,
+                        text: null,
                         user: emailValue,
                     })
                 )

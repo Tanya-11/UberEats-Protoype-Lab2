@@ -55,7 +55,7 @@ const DishCard = (props) => {
 
     const submitDishData = () => {
         console.log(dishData)
-        Axios.post('http://3.129.16.0:3001/api/newdish', {
+        Axios.post('http://localhost:3001/api/newdish', {
             ...dishData,
         })
             .then((res) => {

@@ -21,7 +21,7 @@ export const Favorites = (props) => {
     const getFavRestaurant = () => {
         console.log(props.data);
         props.data.forEach(element => {
-            let response = Axios.get(`http://3.129.16.0:3001/api/profile/${element.restaurant}`);
+            let response = Axios.get(`http://localhost:3001/api/profile/${element.restaurant}`);
             response.then((res)=>{
                 console.log(res);
                 setRestData((prev)=>([
